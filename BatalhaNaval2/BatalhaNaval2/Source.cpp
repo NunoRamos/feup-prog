@@ -73,9 +73,9 @@ int main()
 	}
 
 	if (player1.FleetDestroyed())
-		cout << "Parabéns. O jogador 2 venceu!\n";
+		cout << "Parabens. O jogador 2 venceu!\n";
 	else
-		cout << "Parabéns. O jogador 1 venceu!\n";
+		cout << "Parabens. O jogador 1 venceu!\n";
 
 
 	return 0;
