@@ -9,7 +9,7 @@ PositionChar ConvertToPositionChar(PositionInt position);
 
 void WaitForEnter();
 
-void ClearScreen();
+void ClearScreen(); //cenas
 
 void SetColor(unsigned int color);
 

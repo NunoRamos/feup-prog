@@ -85,14 +85,14 @@
     <ClCompile Include="..\..\..\..\..\Desktop\Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\Desktop\AuxFunctions.h" />
-    <ClInclude Include="..\..\..\..\..\Desktop\Board.h" />
-    <ClInclude Include="..\..\..\..\..\Desktop\Bomb.h" />
-    <ClInclude Include="..\..\..\..\..\Desktop\Highscore.h" />
-    <ClInclude Include="..\..\..\..\..\Desktop\Player.h" />
-    <ClInclude Include="..\..\..\..\..\Desktop\Position.h" />
-    <ClInclude Include="..\..\..\..\..\Desktop\Score.h" />
-    <ClInclude Include="..\..\..\..\..\Desktop\Ship.h" />
+    <ClInclude Include="AuxFunctions.h" />
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="Bomb.h" />
+    <ClInclude Include="Highscore.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Position.h" />
+    <ClInclude Include="Score.h" />
+    <ClInclude Include="Ship.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
