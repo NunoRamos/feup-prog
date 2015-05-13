@@ -9,7 +9,7 @@ PositionChar ConvertToPositionChar(PositionInt position);
 
 void WaitForEnter();
 
-void ClearScreen(); //cenas
+void ClearScreen(); //cenas que nao aparecem no bitbucket, fds
 
 void SetColor(unsigned int color);
 

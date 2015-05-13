@@ -76,15 +76,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\Desktop\AuxFunctions.cpp" />
-    <ClCompile Include="..\..\..\..\..\Desktop\Board.cpp" />
-    <ClCompile Include="..\..\..\..\..\Desktop\Bomb.cpp" />
-    <ClCompile Include="..\..\..\..\..\Desktop\Highscore.cpp" />
-    <ClCompile Include="..\..\..\..\..\Desktop\Player.cpp" />
-    <ClCompile Include="..\..\..\..\..\Desktop\Ship.cpp" />
-    <ClCompile Include="..\..\..\..\..\Desktop\Source.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="AuxFunctions.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Bomb.h" />
@@ -93,6 +84,15 @@
     <ClInclude Include="Position.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="Ship.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AuxFunctions.cpp" />
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="Highscore.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
