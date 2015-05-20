@@ -21,4 +21,5 @@ Highscore::Highscore()
 		file.readsome(score, TIME_SIZE);
 		//ok percebi
 	}
+	//esta-se bem
 }
