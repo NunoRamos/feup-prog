@@ -11,6 +11,9 @@ const unsigned int NAME_SIZE = 10;
 const unsigned int TIME_SIZE = 10;
 const unsigned int HIGHSCORE_SIZE = 10;
 
+//==========================================================================================//
+//Highscore Default Constructor
+//Reads the highscore binary file and fills the "scores" vector.
 
 Highscore::Highscore()
 {
@@ -24,7 +27,6 @@ Highscore::Highscore()
 
 	if (file.is_open())
 	{
-		//		file.seekg(ios::beg);
 		file.peek();
 		while (!file.eof() && i < 10)
 		{
@@ -49,10 +51,11 @@ Highscore::Highscore()
 	hasChanged = false;
 }
 
-Score Highscore::operator[] (unsigned int index) const
-{
-	return scores.at(index);
-}
+//==========================================================================================//
+//Insert Score
+//Inserts the score provided as argument in the "scores" vector depending on its position.
+//The lower the score, the lower the index. The "scores" vector has a maximum size of 10.
+//So if a score is higher than scores[9], it will be discarded.
 
 void Highscore::InsertScore(const Score &score)
 {
@@ -79,7 +82,20 @@ void Highscore::InsertScore(const Score &score)
 	}
 }
 
-void Highscore::ShowHighscore()
+void Highscore::InsertScore(string name, time_t score)
+{
+	Score temp;
+	temp.name = name;
+	temp.score = score;
+	InsertScore(temp);
+}
+
+//==========================================================================================//
+//Show Highscore
+//Shows the highscore screen. If there are no highscores set, 
+//it will display a message so that the users acknowledges it.
+
+void Highscore::ShowHighscore() const
 {
 	cout << "|=========================================|\n"
 		<< "|                HIGHSCORES               |\n"
@@ -102,15 +118,10 @@ void Highscore::ShowHighscore()
 
 }
 
-void Highscore::AddScore(string name, time_t score)
-{
-	Score temp;
-
-	temp.name = name;
-	temp.score = score;
-
-	InsertScore(temp);
-}
+//==========================================================================================//
+//Highscore Destructor
+//If the top 10 highscores have changed, the highscore file will be overwritten.
+//Otherwise, it will do nothing.
 
 Highscore::~Highscore()
 {

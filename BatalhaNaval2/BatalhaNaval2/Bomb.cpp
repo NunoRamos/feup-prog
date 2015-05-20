@@ -2,6 +2,10 @@
 #include "AuxFunctions.h"
 #include <stdlib.h>     
 
+//==========================================================================================//
+//Bomb Constructor
+//Tries to randomly change the bomb target.
+
 Bomb::Bomb(PositionChar targetPosition)
 {
 
@@ -32,6 +36,10 @@ Bomb::Bomb(PositionChar targetPosition)
 
 
 }
+
+//==========================================================================================//
+//Get Target Position
+//Returns the bomb target as PositionChar.
 
 PositionChar Bomb::GetTargetPosition() const
 {

@@ -12,9 +12,9 @@ class Highscore
 {
 public:
 	Highscore();
-	Score operator[] (unsigned int index) const;
 	void InsertScore(const Score &score);
-	void ShowHighscore();
+	void InsertScore(string name, time_t score);
+	void ShowHighscore() const;
 	void AddScore(string name, time_t score);
 	~Highscore();
 private:

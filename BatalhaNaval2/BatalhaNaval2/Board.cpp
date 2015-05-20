@@ -10,7 +10,7 @@
 using namespace std;
 
 //==========================================================================================//
-//Default Constructor
+//Board Default Constructor
 
 Board::Board()
 {
@@ -134,7 +134,6 @@ bool Board::PutShip(const Ship &s, int shipIndex)
 //==========================================================================================//
 //Remove Ship
 //Removes the ship only from the board. Does not update its coordinates nor the "ships" vector.
-//Returs nothing.
 
 void Board::RemoveShip(const Ship &s)
 {
@@ -214,7 +213,6 @@ unsigned int Board::ShipsLeft()
 //==========================================================================================//
 //Move Ships
 //Attempts to move every ship of the "ships" vector using the function MoveShip.
-//Returns nothing.
 
 void Board::MoveShips()
 {
@@ -292,7 +290,6 @@ int Board::Attack(const Bomb &b)
 //==========================================================================================//
 //Update
 //Recreates the "board" vector and places every ship.
-//Returns nothing.
 
 void Board::Update()
 {
@@ -307,24 +304,23 @@ void Board::Update()
 //==========================================================================================//
 //Display
 //Prints the board to the screen.
-//Returns nothing.
 
 void Board::Display() const
 {
 
 	cout << "  ";
 	SetColor(15);
-	for (unsigned int i = 0; i < board.at(0).size(); i++)	//	Usado para criar
-	{														//	a linha de letras
-		cout << ' ' << (char)(97 + i);						//	minúsculas no topo
-	}														//	do tabuleiro.
+	for (unsigned int i = 0; i < board.at(0).size(); i++)	//	Creates the decapitalized letter row on the top of the board.
+	{														
+		cout << ' ' << (char)(97 + i);						
+	}														
 	cout << endl;
 
 
 	for (unsigned int i = 0; i < board.size(); i++)
 	{
 		SetColor(15);
-		cout << ' ' << (char)(65 + i);		// Adiciona coluna de letras maiúsculas à esquerda do tabuleiro.
+		cout << ' ' << (char)(65 + i);		//Adds the capitalized letter column to the left of the board.
 
 		for (unsigned int j = 0; j < board.at(0).size(); j++)
 		{
@@ -335,14 +331,11 @@ void Board::Display() const
 			}
 			else
 			{
-				//if (!ships.at(board.at(i).at(j)).isDestroyed())
-
 				PositionInt position;
 				position.col = j;
 				position.lin = i;
 				SetColor(ships.at(board.at(i).at(j)).GetShipColor(), 4);
 				cout << ' ' << ships.at(board.at(i).at(j)).GetShipStatusSymbol(position);
-
 			}
 
 		}
