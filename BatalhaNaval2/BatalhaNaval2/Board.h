@@ -15,15 +15,20 @@ class Board
 public:
 	Board();
 	Board(const string &filename); // loads board from file 'filename'
-	void RemoveShip(const Ship &s);
-	bool CanPlaceShip(const Ship &s);
 	Ship GetShip(unsigned int shipIndex);
-	bool PutShip(const Ship &s, int shipIndex); // adds ship to the board, if possible; Adicionei shipIndex por ser conveniente
+
 	void MoveShips(); // tries to randmonly move all the ships of the fleet
-	int Attack(const Bomb &b);
-	void Update();
-	unsigned int ShipsLeft();
 	bool MoveShip(unsigned int shipIndex);
+	bool CanPlaceShip(const Ship &s);
+	
+	void Update();
+	bool PutShip(const Ship &s, int shipIndex); // adds ship to the board, if possible; Adicionei shipIndex por ser conveniente
+	void RemoveShip(const Ship &s);
+	
+	int Attack(const Bomb &b);
+	
+	unsigned int GetShipsLeft();
+	
 	void Display() const; // displays the colored board during the game
 
 private:

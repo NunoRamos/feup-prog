@@ -24,7 +24,6 @@ public:
 	char GetShipStatusSymbol(PositionInt position) const;
 	string GetShipStatus() const;
 	char GetShipSymbol() const;
-	bool Move(char direction, bool rotate, unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax); // moves the boat (SEE NOTES)
 	bool MoveRand(unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax); // moves the ship randomly
 	bool Attack(size_t partNumber); //partNumber = {0,1,…, size-1}
 	bool IsDestroyed() const; // checks whether the ship is destroyed

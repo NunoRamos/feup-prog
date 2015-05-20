@@ -192,11 +192,11 @@ bool Board::MoveShip(unsigned int shipIndex)
 }
 
 //==========================================================================================//
-//Ships Left
+//Get Ships Left
 //Iterates through the "ships" vector and counts for every destroyed ship. Then, it returns the counter.
 //Returns the number of ships left.
 
-unsigned int Board::ShipsLeft()
+unsigned int Board::GetShipsLeft()
 {
 	unsigned int shipsInVector = ships.size();
 	unsigned int destroyedShips = 0;

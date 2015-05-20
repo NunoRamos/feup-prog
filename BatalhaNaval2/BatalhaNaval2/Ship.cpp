@@ -1,8 +1,9 @@
 #include "Ship.h"
 #include "AuxFunctions.h"
 
-
-
+//==========================================================================================//
+//Ship Constructor
+//Sets ship's attributes according to the arguments.
 
 Ship::Ship(char symbol, PositionChar position, char orientation, unsigned int size,
 	unsigned int color)
@@ -16,40 +17,72 @@ Ship::Ship(char symbol, PositionChar position, char orientation, unsigned int si
 	status = string(size, symbol);
 }
 
+//==========================================================================================//
+//Get Ship Color
+//Returns the ship color.
+
 int Ship::GetShipColor() const
 {
 	return color;
 }
+
+//==========================================================================================//
+//Get Last Part Destroyed
+//Returns the index of the part that was last destroyed.
 
 int Ship::GetLastPartDestroyed() const
 {
 	return lastPartDestroyed;
 }
 
+//==========================================================================================//
+//Get Ship Size
+//Returns the ship size.
+
 unsigned int Ship::GetShipSize() const
 {
 	return size;
 }
+
+//==========================================================================================//
+//Get Ship Position
+//Returns the ship position as PositionInt
 
 PositionInt Ship::GetShipPosition() const
 {
 	return position;
 }
 
+//==========================================================================================//
+//Get Ship Orientation
+//Returns the ship orientation.
+
 char Ship::GetShipOrientation() const
 {
 	return orientation;
 }
+
+//==========================================================================================//
+//Get Ship Symbol
+//Returns the ship symbol.
 
 char Ship::GetShipSymbol() const
 {
 	return symbol;
 }
 
+//==========================================================================================//
+//Get Ship Status
+//Returns the ship status.
+
 string Ship::GetShipStatus() const
 {
 	return status;
 }
+
+//==========================================================================================//
+//Get Ship Status Symbol
+//Returns the ship capitalized or decapitalizeed symbol based on the ship status.
 
 char Ship::GetShipStatusSymbol(PositionInt position) const
 {
@@ -59,11 +92,10 @@ char Ship::GetShipStatusSymbol(PositionInt position) const
 		return status.at(position.col - this->position.col);
 }
 
-bool Ship::Move(char direction, bool rotate, unsigned int lineMin, unsigned int
-	columnMin, unsigned int lineMax, unsigned int columnMax)
-{
-	return true;
-}
+//==========================================================================================//
+//Move Rand
+//Tries to randomly move the ship.
+//Returns true if the ship fits the board dimensions. Returns false otherwise.
 
 bool Ship::MoveRand(unsigned int lineMin, unsigned int columnMin, unsigned int
 	lineMax, unsigned int columnMax)
@@ -122,10 +154,19 @@ bool Ship::MoveRand(unsigned int lineMin, unsigned int columnMin, unsigned int
 	return true;
 }
 
+//==========================================================================================//
+//Set Ship Orientation
+//Sets the ship orientation according to its argument.
+
 void Ship::SetShipOrientation(char orientation)
 {
 	this->orientation = orientation;
 }
+
+//==========================================================================================//
+//Attack
+//Changes the status of the ship depending on the attack and updates "lastPartDestroyed" attribute.
+//Returns true if the ship part was changed. Returns false otherwise.
 
 bool Ship::Attack(size_t partNumber)
 {
@@ -136,6 +177,11 @@ bool Ship::Attack(size_t partNumber)
 	lastPartDestroyed = partNumber;
 	return true;
 }
+
+//==========================================================================================//
+//Is Destroyed
+//Checks if at least half of the ship status is decapitalized.
+//Returns true if the condition above was met. Returns false otherwise.
 
 bool Ship::IsDestroyed() const
 {
@@ -150,6 +196,10 @@ bool Ship::IsDestroyed() const
 		return true;
 	return false;
 }
+
+//==========================================================================================//
+//Set Ship Position
+//Sets the ship position according to its argument.
 
 void Ship::SetShipPosition(PositionInt position)
 {

@@ -21,7 +21,7 @@ Player::Player(string playerName, string boardFileName)
 {
 	name = playerName;
 	board = Board(boardFileName);
-	shipsLeft = board.ShipsLeft();
+	shipsLeft = board.GetShipsLeft();
 	timeElapsed = 0;
 }
 
@@ -114,5 +114,5 @@ void Player::AttackBoard(const Bomb &b)
 		cout << "You have hit " << attackedShip.GetShipSymbol() << " at " << position.lin << position.col << ".\n\n";
 	}
 
-	shipsLeft = board.ShipsLeft();
+	shipsLeft = board.GetShipsLeft();
 }
