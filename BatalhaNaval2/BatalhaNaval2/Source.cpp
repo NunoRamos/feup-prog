@@ -9,6 +9,24 @@
 
 using namespace std;
 
+int ShowMenu()
+{
+	int option;
+	cout << "|=========================================|\n"
+		<< "|			GAME MENU SELECTION            |\n"
+		<< "|=========================================|\n"
+		<< "| Options:								   |\n"
+		<< "|		      1. Play					   |\n"
+		<< "|            2. View Top 10			   |\n"
+		<< "|            3. Exit                      |\n"
+		<< "|=========================================|\n"
+		<< " Select option:  ";
+	cin >> option;
+	cout << "Option " << option << "selected\n";
+	
+	return option;
+}
+
 int main()
 {
 	srand((unsigned int) time(NULL));
@@ -17,6 +35,7 @@ int main()
 	unsigned int turn = rand()%2;
 	time_t timer;
 		
+	ShowMenu();
 
 	cout << "Qual e o nome do jogador 1?\nNome: ";
 	cin >> playerName;
