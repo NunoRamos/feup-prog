@@ -14,13 +14,13 @@ Highscore::Highscore()
 	char[] 
 		
 	file.open("highscore.dat", ios::binary);
-	//alteracao numero 1
-
+	
 
 	while (!file.eof())
 	{
 		file.readsome(name, NAME_SIZE);
 		file.readsome(score, TIME_SIZE);
-		//ok percebi
+		
 	}
+	
 }
