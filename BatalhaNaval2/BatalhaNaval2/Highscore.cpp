@@ -28,12 +28,12 @@ Highscore::Highscore()
 	file.close();
 }
 
-Score Highscore::operator[] (unsigned int index)
+Score Highscore::operator[] (unsigned int index) const
 {
 	return scores.at(index);
 }
 
-bool Highscore::InsertScore(Score score)
+bool Highscore::InsertScore(const Score &score)
 {
 	for (size_t i = 0; i < scores.size(); i++)
 	{
