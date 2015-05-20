@@ -10,6 +10,11 @@
 
 using namespace std;
 
+//==========================================================================================//
+//Menu
+//Shows the menu and lets the user select an option.
+//Returns the option's number. 
+
 int Menu()
 {
 	int option;
@@ -30,6 +35,11 @@ int Menu()
 	return option;
 }
 
+//==========================================================================================//
+//Board Setup
+//Ask the user(s) the players' name and the board files name.
+//Returns nothing.
+
 void BoardSetup(Player &player1, Player &player2)
 {
 	string playerName;
@@ -43,7 +53,7 @@ void BoardSetup(Player &player1, Player &player2)
 
 	cout << endl;
 	player1.ShowBoard();
-	WaitForEnter();
+	WaitForUserInput();
 	ClearScreen();
 
 	cout << "What is the 2nd player's name?\nName: ";
@@ -54,9 +64,14 @@ void BoardSetup(Player &player1, Player &player2)
 
 	cout << endl;
 	player2.ShowBoard();
-	WaitForEnter();
+	WaitForUserInput();
 	ClearScreen();
 }
+
+//==========================================================================================//
+//Play
+//Takes care of the general aspect of the game: whose turn it is, if a player has won, etc.
+//Returns nothing.
 
 void Play(Player &player1, Player &player2)
 {
@@ -93,7 +108,7 @@ void Play(Player &player1, Player &player2)
 			player1.ShowBoard();
 		}
 		turn++;
-		WaitForEnter();
+		WaitForUserInput();
 		ClearScreen();
 	}
 
@@ -102,6 +117,11 @@ void Play(Player &player1, Player &player2)
 	else
 		cout << "Congratulations. Player 1 has won!\n";
 }
+
+//==========================================================================================//
+//Main
+//Decides what to do given the option the user chose.
+//Returns 0 if the program was successfuly executed. Returns 1 if there was an invalid input in the menu.
 
 int main()
 {
@@ -118,7 +138,7 @@ int main()
 			break;
 		case 2:
 			highscore.ShowHighscore();
-			WaitForEnter();
+			WaitForUserInput();
 			break;
 		case 3:
 			return 0;

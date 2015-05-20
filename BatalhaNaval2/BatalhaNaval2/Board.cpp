@@ -9,10 +9,17 @@
 
 using namespace std;
 
+//==========================================================================================//
+//Default Constructor
+
 Board::Board()
 {
 
 }
+
+//==========================================================================================//
+//Board Constructor
+//Fills the "ships" vector with data read from "filename". Fills the "board" vector with data from "ships".
 
 Board::Board(const string &filename)
 {
@@ -42,6 +49,12 @@ Board::Board(const string &filename)
 	Update();
 }
 
+//==========================================================================================//
+//Can Place Ship
+//Checks if a ship is placeable.
+//Returns true if the ship can be placed. Returns false otherwise.
+
+
 bool Board::CanPlaceShip(const Ship &s)
 {
 	if (s.GetShipOrientation() == 'V')
@@ -64,13 +77,19 @@ bool Board::CanPlaceShip(const Ship &s)
 	}
 }
 
-bool Board::PutShip(const Ship &s, int shipIndex) //adicionei shipIndex porque precisava, perguntar ao professor
+//==========================================================================================//
+//Put Ship
+//Tries to put a ship in the "board" vector.
+//Returns true if the ship has been placed. Returns false otherwise.
+
+
+bool Board::PutShip(const Ship &s, int shipIndex) 
 {
 	PositionInt shipPosition = s.GetShipPosition();
 
 	if (s.GetShipOrientation() == 'V')
 	{
-		//Se o navio já tiver sido destruído, escrever -1
+		//If the ship has already been destroyed, write -1.
 		if (s.IsDestroyed())
 		{
 			for (unsigned int i = 0; i < s.GetShipSize(); i++)
@@ -82,7 +101,7 @@ bool Board::PutShip(const Ship &s, int shipIndex) //adicionei shipIndex porque p
 		if (!CanPlaceShip(s))
 			return false;
 
-		//Acrescenta o navio
+		//Adds the ship.
 		for (unsigned int i = 0; i < s.GetShipSize(); i++)
 		{
 			board.at(shipPosition.lin + i).at(shipPosition.col) = shipIndex;
@@ -90,7 +109,7 @@ bool Board::PutShip(const Ship &s, int shipIndex) //adicionei shipIndex porque p
 	}
 	else
 	{
-		//Se o navio já tiver sido destruído, escrever -1
+		//If the ships has already been destroyed, write -1.
 		if (s.IsDestroyed())
 		{
 			for (unsigned int i = 0; i < s.GetShipSize(); i++)
@@ -102,7 +121,7 @@ bool Board::PutShip(const Ship &s, int shipIndex) //adicionei shipIndex porque p
 		if (!CanPlaceShip(s))
 			return false;
 
-		//Acrescenta o navio
+		//Adds the ship.
 		for (unsigned int i = 0; i < s.GetShipSize(); i++)
 		{
 			board.at(shipPosition.lin).at(shipPosition.col + i) = shipIndex;
@@ -111,6 +130,11 @@ bool Board::PutShip(const Ship &s, int shipIndex) //adicionei shipIndex porque p
 
 	return true;
 }
+
+//==========================================================================================//
+//Remove Ship
+//Removes the ship only from the board. Does not update its coordinates nor the "ships" vector.
+//Returs nothing.
 
 void Board::RemoveShip(const Ship &s)
 {
@@ -132,6 +156,11 @@ void Board::RemoveShip(const Ship &s)
 	}
 }
 
+//==========================================================================================//
+//Move Ship
+//Creates a copy of the original board, position and orientation. It then tries to move a ship randomly.
+//If it cannot, the original configurations will be restored.
+//Returns true if the ship has been moved. Returns false otherwise.
 
 bool Board::MoveShip(unsigned int shipIndex)
 {
@@ -163,6 +192,11 @@ bool Board::MoveShip(unsigned int shipIndex)
 	return true;
 }
 
+//==========================================================================================//
+//Ships Left
+//Iterates through the "ships" vector and counts for every destroyed ship. Then, it returns the counter.
+//Returns the number of ships left.
+
 unsigned int Board::ShipsLeft()
 {
 	unsigned int shipsInVector = ships.size();
@@ -177,6 +211,11 @@ unsigned int Board::ShipsLeft()
 	return shipsInVector - destroyedShips;
 }
 
+//==========================================================================================//
+//Move Ships
+//Attempts to move every ship of the "ships" vector using the function MoveShip.
+//Returns nothing.
+
 void Board::MoveShips()
 {
 	for (size_t i = 0; i < ships.size(); i++)
@@ -185,10 +224,19 @@ void Board::MoveShips()
 	}
 }
 
+//==========================================================================================//
+//Get Ship
+//Returns the ship at "shipIndex" from "ships".
+
 Ship Board::GetShip(unsigned int shipIndex)
 {
 	return ships.at(shipIndex);
 }
+
+//==========================================================================================//
+//Attack
+//Tries to attack a ship in the bomb's position.
+//Returns the ship index if it hit a ship. Returns -1 otherwise.
 
 int Board::Attack(const Bomb &b)
 {
@@ -241,6 +289,11 @@ int Board::Attack(const Bomb &b)
 
 }
 
+//==========================================================================================//
+//Update
+//Recreates the "board" vector and places every ship.
+//Returns nothing.
+
 void Board::Update()
 {
 	board = vector<vector<int>>(numLines, vector<int>(numColumns, -1));
@@ -251,6 +304,10 @@ void Board::Update()
 	}
 }
 
+//==========================================================================================//
+//Display
+//Prints the board to the screen.
+//Returns nothing.
 
 void Board::Display() const
 {

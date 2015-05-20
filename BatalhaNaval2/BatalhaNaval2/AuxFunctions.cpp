@@ -7,6 +7,11 @@
 
 using namespace std;
 
+//==========================================================================================//
+//Convert To PositionInt
+//Gets a PositionChar as argument and converts it to PositionInt.
+//Returns a PositionInt.
+
 PositionInt ConvertToPositionInt(PositionChar position)
 {
 	PositionInt result;
@@ -17,6 +22,10 @@ PositionInt ConvertToPositionInt(PositionChar position)
 	return result;
 }
 
+//==========================================================================================//
+//Convert To PositionChar
+//Gets a PositionInt as argument and converts it to PositionChar.
+//Returns a PositionChar.
 
 PositionChar ConvertToPositionChar(PositionInt position)
 {
@@ -28,13 +37,23 @@ PositionChar ConvertToPositionChar(PositionInt position)
 	return result;
 }
 
-void WaitForEnter()
+//==========================================================================================//
+//Wait For User Input
+//Waits for the user to press a key.
+//Returns nothing.
+
+void WaitForUserInput()
 {
 	string dummy;
 	cout << "Press any key to continue . . .\n";
-	cin.ignore(1000, '\n');
-	getline(cin, dummy);
+	cin.get();
 }
+
+//==========================================================================================//
+//Clear Screen
+//Clears the console screen.
+//Returns nothing.
+
 
 void ClearScreen()
 {
@@ -55,14 +74,21 @@ void ClearScreen()
 
 }
 
+//==========================================================================================//
+//Set Color (overloaded)
+//Sets text color according to its argument.
+//Returns nothing.
+
+
 void SetColor(unsigned int color)
 {
 	HANDLE hcon = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hcon, color);
 }
 //==========================================================================================//
-
-// Set text color & background
+//Set Color (overloaded)
+//Sets text and background color according to its arguments.
+//Returns nothing.
 
 void SetColor(unsigned int color, unsigned int background_color)
 {
