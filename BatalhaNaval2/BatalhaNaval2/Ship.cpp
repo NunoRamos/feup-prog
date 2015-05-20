@@ -99,7 +99,7 @@ bool Ship::MoveRand(unsigned int lineMin, unsigned int columnMin, unsigned int
 	case 1:
 		if (orientation == 'H')
 		{
-			if (positionCopy.lin + size > lineMax )
+			if (positionCopy.lin + size > lineMax)
 				return false;
 			else orientationTemp = 'V';
 		}
@@ -109,10 +109,10 @@ bool Ship::MoveRand(unsigned int lineMin, unsigned int columnMin, unsigned int
 				return false;
 			else orientationTemp = 'H';
 		}
-			
+
 	}
-		
-	if (positionCopy.lin<lineMin || positionCopy.lin >= lineMax || positionCopy.col<columnMin || positionCopy.col >= columnMax)
+
+	if (positionCopy.lin < lineMin || positionCopy.lin >= lineMax || positionCopy.col < columnMin || positionCopy.col >= columnMax)
 		return false;
 
 	orientation = orientationTemp;
@@ -139,14 +139,14 @@ bool Ship::Attack(size_t partNumber)
 
 bool Ship::IsDestroyed() const
 {
-	double numOfHits=0;
+	double numOfHits = 0;
 
 	for (int i = 0; i < status.size(); i++)
 	{
 		if (status.at(i) == tolower(status.at(i)))
 			numOfHits++;
 	}
-	if (numOfHits >= (double) status.size() / 2)
+	if (numOfHits >= (double)status.size() / 2)
 		return true;
 	return false;
 }

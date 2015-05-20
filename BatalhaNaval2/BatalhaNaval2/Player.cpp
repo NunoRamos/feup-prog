@@ -41,10 +41,10 @@ string Player::GetName()
 Bomb Player::GetBomb(string targetString) const
 {
 	PositionChar target;
-	
+
 	target.lin = targetString.at(0);
 	target.col = targetString.at(1);
-	
+
 	Bomb bomb(target);
 
 	return bomb;
@@ -77,8 +77,8 @@ void Player::AttackBoard(const Bomb &b)
 		else
 			position.col += attackedShip.GetLastPartDestroyed();
 
-		cout << "You have hit " << attackedShip.GetShipSymbol() << " at " << position.lin << position.col <<".\n\n";
+		cout << "You have hit " << attackedShip.GetShipSymbol() << " at " << position.lin << position.col << ".\n\n";
 	}
-		
+
 	shipsLeft = board.ShipsLeft();
 }

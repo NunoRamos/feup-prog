@@ -32,7 +32,7 @@ void WaitForEnter()
 {
 	string dummy;
 	cout << "Press any key to continue . . .\n";
-	cin.ignore(1000,'\n');
+	cin.ignore(1000, '\n');
 	getline(cin, dummy);
 }
 

@@ -102,25 +102,22 @@ int main()
 {
 	Highscore highscore;
 
-	highscore.AddScore("Bernardo", 100);
-	highscore.AddScore("Nuno", 1000);
-
 	while (true)
 	{
-	switch (Menu())
-	{
-	case 1:
-		Play();
-		break;
-	case 2:
-		highscore.ShowHighscore();
-		WaitForEnter();
-		break;
-	case 3:
-		return 0;
-	default:
-		return 1;
-	}
+		switch (Menu())
+		{
+		case 1:
+			Play();
+			break;
+		case 2:
+			highscore.ShowHighscore();
+			WaitForEnter();
+			break;
+		case 3:
+			return 0;
+		default:
+			return 1;
+		}
 	}
 
 	return 0;

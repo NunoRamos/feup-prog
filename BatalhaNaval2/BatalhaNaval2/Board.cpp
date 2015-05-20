@@ -17,7 +17,7 @@ Board::Board()
 Board::Board(const string &filename)
 {
 	ifstream boardFile;
-	
+
 	char symbol;
 	unsigned int size;
 	PositionChar position;
@@ -26,7 +26,7 @@ Board::Board(const string &filename)
 	char dummy;
 
 	boardFile.open(filename);
-	
+
 	boardFile >> numLines >> dummy >> numColumns;
 
 	while (!boardFile.eof())
@@ -37,7 +37,7 @@ Board::Board(const string &filename)
 
 	boardFile.close();
 
-	board.resize(numLines,vector<int>(numColumns,-1));
+	board.resize(numLines, vector<int>(numColumns, -1));
 
 	Update();
 }
@@ -78,7 +78,7 @@ bool Board::PutShip(const Ship &s, int shipIndex) //adicionei shipIndex porque p
 				board.at(shipPosition.lin + i).at(shipPosition.col) = -1;
 			}
 		}
-		
+
 		if (!CanPlaceShip(s))
 			return false;
 
@@ -95,7 +95,7 @@ bool Board::PutShip(const Ship &s, int shipIndex) //adicionei shipIndex porque p
 		{
 			for (unsigned int i = 0; i < s.GetShipSize(); i++)
 			{
-				board.at(shipPosition.lin).at(shipPosition.col+i) = -1;
+				board.at(shipPosition.lin).at(shipPosition.col + i) = -1;
 			}
 		}
 
@@ -108,7 +108,7 @@ bool Board::PutShip(const Ship &s, int shipIndex) //adicionei shipIndex porque p
 			board.at(shipPosition.lin).at(shipPosition.col + i) = shipIndex;
 		}
 	}
-	
+
 	return true;
 }
 
@@ -166,7 +166,7 @@ bool Board::MoveShip(unsigned int shipIndex)
 unsigned int Board::ShipsLeft()
 {
 	unsigned int shipsInVector = ships.size();
-	unsigned int destroyedShips=0;
+	unsigned int destroyedShips = 0;
 
 	for (size_t i = 0; i < ships.size(); i++)
 	{
@@ -198,8 +198,8 @@ int Board::Attack(const Bomb &b)
 		return -1;
 
 	if (board.at(bombPosition.lin).at(bombPosition.col) != -1)
-		{
-		
+	{
+
 		int shipIndex = board.at(bombPosition.lin).at(bombPosition.col);
 		size_t i = 0;
 		char orientation = ships.at(shipIndex).GetShipOrientation();
@@ -207,10 +207,10 @@ int Board::Attack(const Bomb &b)
 		PositionInt shipPosition = ships.at(shipIndex).GetShipPosition();
 
 		if (orientation == 'H')
-		{ 
+		{
 			while (i < ships.at(shipIndex).GetShipSize())
 			{
-				if (shipPosition.col+i == bombPosition.col)
+				if (shipPosition.col + i == bombPosition.col)
 				{
 					break;
 				}
@@ -221,7 +221,7 @@ int Board::Attack(const Bomb &b)
 		{
 			while (i < ships.at(shipIndex).GetShipSize())
 			{
-				if (shipPosition.lin+i == bombPosition.lin)
+				if (shipPosition.lin + i == bombPosition.lin)
 				{
 					break;
 				}
@@ -246,7 +246,7 @@ void Board::Update()
 	board = vector<vector<int>>(numLines, vector<int>(numColumns, -1));
 
 	for (size_t i = 0; i < ships.size(); i++)
-	{	
+	{
 		PutShip(ships.at(i), i);
 	}
 }
@@ -254,7 +254,7 @@ void Board::Update()
 
 void Board::Display() const
 {
-	
+
 	cout << "  ";
 	SetColor(15);
 	for (unsigned int i = 0; i < board.at(0).size(); i++)	//	Usado para criar
@@ -279,15 +279,15 @@ void Board::Display() const
 			else
 			{
 				//if (!ships.at(board.at(i).at(j)).isDestroyed())
-				
+
 				PositionInt position;
 				position.col = j;
 				position.lin = i;
 				SetColor(ships.at(board.at(i).at(j)).GetShipColor(), 4);
 				cout << ' ' << ships.at(board.at(i).at(j)).GetShipStatusSymbol(position);
-				
+
 			}
-			
+
 		}
 		cout << endl;
 	}

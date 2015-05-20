@@ -6,7 +6,7 @@
 
 using namespace std;
 
-const string HIGHSCORE_FILENAME = "highscore.bin";
+const string HIGHSCORE_FILENAME = "highscore.dat";
 const unsigned int NAME_SIZE = 10;
 const unsigned int TIME_SIZE = 10;
 const unsigned int HIGHSCORE_SIZE = 10;
@@ -19,23 +19,30 @@ Highscore::Highscore()
 	Score temp;
 	string score_s;
 	int i = 0;
-		
+
 	file.open(HIGHSCORE_FILENAME, ios::binary);
-	
+
 	if (file.is_open())
 	{
-		file.seekg(ios::beg);
+//		file.seekg(ios::beg);
 		file.peek();
-	while (!file.eof() && i < 10)
-	{
-		file.read(name, NAME_SIZE);
-		file.read(score, TIME_SIZE);
-		score_s = score;
-		temp.name = name;
-		temp.score = stoi(score_s);
-		scores.push_back(temp);
-		i++;
+		while (!file.eof() && i < 10)
+		{
+			file.read(name, NAME_SIZE);
+			file.read(score, TIME_SIZE);
+			score_s = score;
+			temp.name = name;
+			temp.score = stoi(score_s);
+			scores.push_back(temp);
+			i++;
+			file.peek();
+		}
 	}
+	else
+	{
+		ofstream createFile;
+		createFile.open(HIGHSCORE_FILENAME, ios::binary);
+		createFile.close();
 	}
 
 	file.close();
@@ -77,21 +84,21 @@ void Highscore::ShowHighscore()
 		<< "|                HIGHSCORES               |\n"
 		<< "|=========================================|\n";
 	if (scores.size() == 0)
-	{ 
+	{
 		cout << "|        NO AVAILABLE HIGHSCORES          |\n";
 	}
 	else
 	{
 		cout << "| No.         Name          Score         |\n";
-	for (size_t i = 0; i < scores.size(); i++)
-	{
-		cout << "| " << setw(2) << i + 1 << ' ' << setw(10)
-			<< scores.at(i).name << setw(NAME_SIZE) << setw(10) << ' '
-			<< setw(TIME_SIZE) <<scores.at(i).score << "|\n";
-	}
+		for (size_t i = 0; i < scores.size(); i++)
+		{
+			cout << "| " << setw(2) << i + 1 << ' ' << setw(10)
+				<< scores.at(i).name << setw(NAME_SIZE) << setw(10) << ' '
+				<< setw(TIME_SIZE) << scores.at(i).score << "|\n";
+		}
 	}
 	cout << "|=========================================|\n";
-		
+
 }
 
 void Highscore::AddScore(string name, time_t score)
@@ -109,11 +116,9 @@ Highscore::~Highscore()
 	ofstream file;
 	char buffer[TIME_SIZE];
 
-	file.open(HIGHSCORE_FILENAME, ios::trunc || ios::binary );
+	file.open(HIGHSCORE_FILENAME, ios::binary);
 
 	int size = file.end - file.beg;
-
-	//falta corrigir esta merda toda
 
 	for (size_t i = 0; i < scores.size(); i++)
 	{
