@@ -89,6 +89,7 @@
     <ClCompile Include="AuxFunctions.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="Highscore.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Ship.cpp" />
     <ClCompile Include="Source.cpp" />
