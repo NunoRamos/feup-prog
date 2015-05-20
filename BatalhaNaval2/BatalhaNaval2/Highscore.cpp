@@ -14,6 +14,8 @@ Highscore::Highscore()
 	char[] 
 		
 	file.open("highscore.dat", ios::binary);
+	//alteracao numero 1
+
 
 	while (!file.eof())
 	{
