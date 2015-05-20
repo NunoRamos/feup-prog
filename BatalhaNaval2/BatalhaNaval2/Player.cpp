@@ -20,9 +20,9 @@ Player::Player(string playerName, string boardFileName)
 	timeElapsed = 0;
 }
 
-void Player::showBoard() const
+void Player::ShowBoard() const
 {
-	board.display();
+	board.Display();
 }
 
 bool Player::FleetDestroyed() const
@@ -38,7 +38,7 @@ string Player::GetName()
 	return name;
 }
 
-Bomb Player::getBomb(string targetString) const
+Bomb Player::GetBomb(string targetString) const
 {
 	PositionChar target;
 	
@@ -60,14 +60,14 @@ void Player::AddTimeElapsed(time_t time)
 	timeElapsed += time;
 }
 
-void Player::attackBoard(const Bomb &b)
+void Player::AttackBoard(const Bomb &b)
 {
-	board.moveShips();
+	board.MoveShips();
 	board.Update();
 	//board.display();
-	int shipAttack = board.attack(b);
+	int shipAttack = board.Attack(b);
 	if (shipAttack == -1)
-		cout << "Falhou o navio.\n\n";
+		cout << "You have missed the ship.\n\n";
 	else
 	{
 		Ship attackedShip = board.GetShip(shipAttack);
@@ -77,7 +77,7 @@ void Player::attackBoard(const Bomb &b)
 		else
 			position.col += attackedShip.GetLastPartDestroyed();
 
-		cout << "Acertou no navio " << attackedShip.GetShipSymbol() << " na posicao " << position.lin << position.col <<".\n\n";
+		cout << "You have hit " << attackedShip.GetShipSymbol() << " at " << position.lin << position.col <<".\n\n";
 	}
 		
 	shipsLeft = board.ShipsLeft();

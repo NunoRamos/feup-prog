@@ -13,15 +13,17 @@ using namespace std;
 int Menu()
 {
 	int option;
+	ClearScreen();
 	cout << "|=========================================|\n"
-		<< "|           GAME MENU SELECTION           |\n"
+		<< "|                BATTLESHIP               |\n"
 		<< "|=========================================|\n"
-		<< "| Options:                                |\n"
+		<< "| Select an option:                       |\n"
+		<< "|                                         |\n"
 		<< "|            1. Play                      |\n"
-		<< "|            2. View Top 10               |\n"
+		<< "|            2. Highscores                |\n"
 		<< "|            3. Exit                      |\n"
 		<< "|=========================================|\n"
-		<< " Select option:  ";
+		<< " Select an option:  ";
 	cin >> option;
 	ClearScreen();
 
@@ -43,7 +45,7 @@ void Play()
 	Player player1 = Player(playerName, boardFileName);
 
 	cout << endl;
-	player1.showBoard();
+	player1.ShowBoard();
 	WaitForEnter();
 	ClearScreen();
 
@@ -54,7 +56,7 @@ void Play()
 	Player player2 = Player(playerName, boardFileName);
 
 	cout << endl;
-	player2.showBoard();
+	player2.ShowBoard();
 	WaitForEnter();
 	ClearScreen();
 
@@ -64,26 +66,26 @@ void Play()
 		if (turn % 2 == 0) // JOGADOR 1
 		{
 			cout << "JOGADOR 1 - " << player1.GetName() << "\n\n";
-			player2.showBoard();
-			cout << player2.GetName() << ", para onde quer enviar a bomba?\n";
-			timer = time(NULL);
-			cin >> targetString;
-			timer = time(NULL); -timer;
-			player1.AddTimeElapsed(timer);
-			player2.attackBoard(player1.getBomb(targetString));
-			player2.showBoard();
-		}
-		else  //JOGADOR 2
-		{
-			cout << "JOGADOR 2 - " << player2.GetName() << "\n\n";
-			player1.showBoard();
+			player2.ShowBoard();
 			cout << player2.GetName() << ", para onde quer enviar a bomba?\n";
 			timer = time(NULL);
 			cin >> targetString;
 			timer = time(NULL) - timer;
 			player1.AddTimeElapsed(timer);
-			player1.attackBoard(player2.getBomb(targetString));
-			player1.showBoard();
+			player2.AttackBoard(player1.GetBomb(targetString));
+			player2.ShowBoard();
+		}
+		else  //JOGADOR 2
+		{
+			cout << "JOGADOR 2 - " << player2.GetName() << "\n\n";
+			player1.ShowBoard();
+			cout << player2.GetName() << ", para onde quer enviar a bomba?\n";
+			timer = time(NULL);
+			cin >> targetString;
+			timer = time(NULL) - timer;
+			player1.AddTimeElapsed(timer);
+			player1.AttackBoard(player2.GetBomb(targetString));
+			player1.ShowBoard();
 		}
 		turn++;
 		WaitForEnter();
@@ -103,6 +105,8 @@ int main()
 	highscore.AddScore("Bernardo", 100);
 	highscore.AddScore("Nuno", 1000);
 
+	while (true)
+	{
 	switch (Menu())
 	{
 	case 1:
@@ -110,11 +114,13 @@ int main()
 		break;
 	case 2:
 		highscore.ShowHighscore();
+		WaitForEnter();
 		break;
 	case 3:
 		return 0;
 	default:
 		return 1;
+	}
 	}
 
 	return 0;

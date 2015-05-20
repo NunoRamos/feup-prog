@@ -13,13 +13,13 @@ class Player
 public:
 	Player();
 	Player(string playerName, string boardFileName);
-	void showBoard() const; // shows the player’s board
-	Bomb getBomb(string targetString) const; // asks bomb target coordinates and creates the bomb
+	void ShowBoard() const; // shows the player’s board
+	Bomb GetBomb(string targetString) const; // asks bomb target coordinates and creates the bomb
 	bool FleetDestroyed() const; // checks if player's is destroyed
 	string GetName();
 	time_t GetTimeElapsed() const;
 	void AddTimeElapsed(time_t time);
-	void attackBoard(const Bomb &b); // "receives" a bomb from the opponent;
+	void AttackBoard(const Bomb &b); // "receives" a bomb from the opponent;
 	// updates own board taking into account the damages
 	// caused by the bomb; BEFORE THAT… moves the ships
 private:

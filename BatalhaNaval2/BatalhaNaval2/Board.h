@@ -18,16 +18,14 @@ public:
 	void RemoveShip(const Ship &s);
 	bool CanPlaceShip(const Ship &s);
 	Ship GetShip(unsigned int shipIndex);
-	bool putShip(const Ship &s, int shipIndex); // adds ship to the board, if possible; Adicionei shipIndex por ser conveniente
-	void moveShips(); // tries to randmonly move all the ships of the fleet
-	int attack(const Bomb &b);
+	bool PutShip(const Ship &s, int shipIndex); // adds ship to the board, if possible; Adicionei shipIndex por ser conveniente
+	void MoveShips(); // tries to randmonly move all the ships of the fleet
+	int Attack(const Bomb &b);
 	void Update();
 	unsigned int ShipsLeft();
 	bool MoveShip(unsigned int shipIndex);
-	void display() const; // displays the colored board during the game
-	void show() const; // shows the attributes of the board (for debugging)
-	// OTHER METHODS, if necessary
-	// ...
+	void Display() const; // displays the colored board during the game
+
 private:
 	int numLines, numColumns; // redundant info …
 	vector<Ship> ships; // ships that are placed on the board

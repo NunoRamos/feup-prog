@@ -59,13 +59,13 @@ char Ship::GetShipStatusSymbol(PositionInt position) const
 		return status.at(position.col - this->position.col);
 }
 
-bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int
+bool Ship::Move(char direction, bool rotate, unsigned int lineMin, unsigned int
 	columnMin, unsigned int lineMax, unsigned int columnMax)
 {
 	return true;
 }
 
-bool Ship::moveRand(unsigned int lineMin, unsigned int columnMin, unsigned int
+bool Ship::MoveRand(unsigned int lineMin, unsigned int columnMin, unsigned int
 	lineMax, unsigned int columnMax)
 {
 	PositionInt positionCopy;
@@ -127,7 +127,7 @@ void Ship::SetShipOrientation(char orientation)
 	this->orientation = orientation;
 }
 
-bool Ship::attack(size_t partNumber)
+bool Ship::Attack(size_t partNumber)
 {
 	if (status.at(partNumber) == tolower(status.at(partNumber)))
 		return false;
@@ -137,7 +137,7 @@ bool Ship::attack(size_t partNumber)
 	return true;
 }
 
-bool Ship::isDestroyed() const
+bool Ship::IsDestroyed() const
 {
 	double numOfHits=0;
 
@@ -154,11 +154,6 @@ bool Ship::isDestroyed() const
 void Ship::SetShipPosition(PositionInt position)
 {
 	this->position = position;
-}
-
-void Ship::show() const
-{
-
 }
 
 

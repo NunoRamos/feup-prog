@@ -31,7 +31,7 @@ PositionChar ConvertToPositionChar(PositionInt position)
 void WaitForEnter()
 {
 	string dummy;
-	cout << "Pressione qualquer tecla para continuar...\n";
+	cout << "Press any key to continue . . .\n";
 	cin.ignore(1000,'\n');
 	getline(cin, dummy);
 }

@@ -78,11 +78,11 @@ void Highscore::ShowHighscore()
 		<< "|=========================================|\n";
 	if (scores.size() == 0)
 	{ 
-		cout << "|     NAO HA HIGHSCORES DISPONIVEIS       |\n";
+		cout << "|        NO AVAILABLE HIGHSCORES          |\n";
 	}
 	else
 	{
-		cout <<  "| No.         Name         Score          |\n";
+		cout << "| No.         Name          Score         |\n";
 	for (size_t i = 0; i < scores.size(); i++)
 	{
 		cout << "| " << setw(2) << i + 1 << ' ' << setw(10)

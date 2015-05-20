@@ -24,13 +24,10 @@ public:
 	char GetShipStatusSymbol(PositionInt position) const;
 	string GetShipStatus() const;
 	char GetShipSymbol() const;
-	// OTHER METHODS, if necessary
-	// ...
-	bool move(char direction, bool rotate, unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax); // moves the boat (SEE NOTES)
-	bool moveRand(unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax); // moves the ship randomly
-	bool attack(size_t partNumber); //partNumber = {0,1,…, size-1}
-	bool isDestroyed() const; // checks whether the ship is destroyed
-	void show() const; // shows the attributes of the ship (for debugging)
+	bool Move(char direction, bool rotate, unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax); // moves the boat (SEE NOTES)
+	bool MoveRand(unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax); // moves the ship randomly
+	bool Attack(size_t partNumber); //partNumber = {0,1,…, size-1}
+	bool IsDestroyed() const; // checks whether the ship is destroyed
 private:
 	int lastPartDestroyed;
 	char symbol; // 'P' = "porta-aviões"; 'F' = "fragata"; … (portuguese names)

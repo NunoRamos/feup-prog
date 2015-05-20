@@ -33,7 +33,7 @@ Bomb::Bomb(PositionChar targetPosition)
 
 }
 
-PositionChar Bomb::getTargetPosition() const
+PositionChar Bomb::GetTargetPosition() const
 {
 	PositionChar Target;
 	Target.lin = targetLine;

@@ -64,14 +64,14 @@ bool Board::CanPlaceShip(const Ship &s)
 	}
 }
 
-bool Board::putShip(const Ship &s, int shipIndex) //adicionei shipIndex porque precisava, perguntar ao professor
+bool Board::PutShip(const Ship &s, int shipIndex) //adicionei shipIndex porque precisava, perguntar ao professor
 {
 	PositionInt shipPosition = s.GetShipPosition();
 
 	if (s.GetShipOrientation() == 'V')
 	{
 		//Se o navio já tiver sido destruído, escrever -1
-		if (s.isDestroyed())
+		if (s.IsDestroyed())
 		{
 			for (unsigned int i = 0; i < s.GetShipSize(); i++)
 			{
@@ -91,7 +91,7 @@ bool Board::putShip(const Ship &s, int shipIndex) //adicionei shipIndex porque p
 	else
 	{
 		//Se o navio já tiver sido destruído, escrever -1
-		if (s.isDestroyed())
+		if (s.IsDestroyed())
 		{
 			for (unsigned int i = 0; i < s.GetShipSize(); i++)
 			{
@@ -142,9 +142,9 @@ bool Board::MoveShip(unsigned int shipIndex)
 
 	RemoveShip(ships.at(shipIndex));
 
-	if (ships.at(shipIndex).moveRand(0, 0, numLines - 1, numColumns - 1))
+	if (ships.at(shipIndex).MoveRand(0, 0, numLines - 1, numColumns - 1))
 	{
-		if (!putShip(ships.at(shipIndex), shipIndex))
+		if (!PutShip(ships.at(shipIndex), shipIndex))
 		{
 			placeInOldPosition = true;
 		}
@@ -170,14 +170,14 @@ unsigned int Board::ShipsLeft()
 
 	for (size_t i = 0; i < ships.size(); i++)
 	{
-		if (ships.at(i).isDestroyed())
+		if (ships.at(i).IsDestroyed())
 			destroyedShips++;
 	}
 
 	return shipsInVector - destroyedShips;
 }
 
-void Board::moveShips()
+void Board::MoveShips()
 {
 	for (size_t i = 0; i < ships.size(); i++)
 	{
@@ -190,9 +190,9 @@ Ship Board::GetShip(unsigned int shipIndex)
 	return ships.at(shipIndex);
 }
 
-int Board::attack(const Bomb &b)
+int Board::Attack(const Bomb &b)
 {
-	PositionInt bombPosition = ConvertToPositionInt(b.getTargetPosition());
+	PositionInt bombPosition = ConvertToPositionInt(b.GetTargetPosition());
 
 	if (bombPosition.col > numColumns || bombPosition.lin > numLines)
 		return -1;
@@ -229,10 +229,10 @@ int Board::attack(const Bomb &b)
 			}
 		}
 
-		if (ships.at(board.at(bombPosition.lin).at(bombPosition.col)).isDestroyed())
+		if (ships.at(board.at(bombPosition.lin).at(bombPosition.col)).IsDestroyed())
 			return -1;
 
-		ships.at(board.at(bombPosition.lin).at(bombPosition.col)).attack(i);
+		ships.at(board.at(bombPosition.lin).at(bombPosition.col)).Attack(i);
 
 		return shipIndex;
 	}
@@ -247,12 +247,12 @@ void Board::Update()
 
 	for (size_t i = 0; i < ships.size(); i++)
 	{	
-		putShip(ships.at(i), i);
+		PutShip(ships.at(i), i);
 	}
 }
 
 
-void Board::display() const
+void Board::Display() const
 {
 	
 	cout << "  ";
@@ -271,7 +271,7 @@ void Board::display() const
 
 		for (unsigned int j = 0; j < board.at(0).size(); j++)
 		{
-			if (board.at(i).at(j) == -1 || ships.at(board.at(i).at(j)).isDestroyed())
+			if (board.at(i).at(j) == -1 || ships.at(board.at(i).at(j)).IsDestroyed())
 			{
 				SetColor(15, 4);
 				cout << ' ' << '.';
@@ -293,10 +293,5 @@ void Board::display() const
 	}
 	SetColor(15);
 	cout << endl;
-
-}
-
-void Board::show() const
-{
 
 }
