@@ -37,6 +37,11 @@ bool Highscore::InsertScore(Score score)
 {
 	for (size_t i = 0; i < scores.size(); i++)
 	{
+		if (score.score < scores.at(i).score)
+		{
 
+		}
 	}
+
+	return true;
 }
