@@ -6,6 +6,7 @@
 
 #include "Player.h"
 #include "AuxFunctions.h"
+#include "Highscore.h"
 
 using namespace std;
 
@@ -22,6 +23,7 @@ int Menu()
 		<< "|=========================================|\n"
 		<< " Select option:  ";
 	cin >> option;
+	ClearScreen();
 
 	return option;
 }
@@ -96,14 +98,18 @@ void Play()
 
 int main()
 {
+	Highscore highscore;
+
+	highscore.AddScore("Bernardo", 100);
+	highscore.AddScore("Nuno", 1000);
+
 	switch (Menu())
 	{
 	case 1:
-		ClearScreen();
 		Play();
 		break;
 	case 2:
-		ClearScreen();
+		highscore.ShowHighscore();
 		break;
 	case 3:
 		return 0;
