@@ -18,7 +18,7 @@ public:
 	bool FleetDestroyed() const; // checks if player's is destroyed
 	string GetName();
 	time_t GetTimeElapsed() const;
-	time_t AddTimeElapsed(time_t time);
+	void AddTimeElapsed(time_t time);
 	void attackBoard(const Bomb &b); // "receives" a bomb from the opponent;
 	// updates own board taking into account the damages
 	// caused by the bomb; BEFORE THAT… moves the ships

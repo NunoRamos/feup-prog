@@ -55,7 +55,7 @@ time_t Player::GetTimeElapsed() const
 	return timeElapsed;
 }
 
-time_t Player::AddTimeElapsed(time_t time)
+void Player::AddTimeElapsed(time_t time)
 {
 	timeElapsed += time;
 }

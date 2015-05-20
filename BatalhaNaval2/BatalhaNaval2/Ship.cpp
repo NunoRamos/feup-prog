@@ -139,14 +139,14 @@ bool Ship::attack(size_t partNumber)
 
 bool Ship::isDestroyed() const
 {
-	int numOfHits=0;
+	double numOfHits=0;
 
 	for (int i = 0; i < status.size(); i++)
 	{
 		if (status.at(i) == tolower(status.at(i)))
 			numOfHits++;
 	}
-	if (numOfHits >(double) status.size() / 2)
+	if (numOfHits >= (double) status.size() / 2)
 		return true;
 	return false;
 }

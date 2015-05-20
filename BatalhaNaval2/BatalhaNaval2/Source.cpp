@@ -9,33 +9,30 @@
 
 using namespace std;
 
-int ShowMenu()
+int Menu()
 {
 	int option;
 	cout << "|=========================================|\n"
-		<< "|			GAME MENU SELECTION            |\n"
+		<< "|           GAME MENU SELECTION           |\n"
 		<< "|=========================================|\n"
-		<< "| Options:								   |\n"
-		<< "|		      1. Play					   |\n"
-		<< "|            2. View Top 10			   |\n"
+		<< "| Options:                                |\n"
+		<< "|            1. Play                      |\n"
+		<< "|            2. View Top 10               |\n"
 		<< "|            3. Exit                      |\n"
 		<< "|=========================================|\n"
 		<< " Select option:  ";
 	cin >> option;
-	cout << "Option " << option << "selected\n";
-	
+
 	return option;
 }
 
-int main()
+void Play()
 {
-	srand((unsigned int) time(NULL));
+	srand((unsigned int)time(NULL));
 	string playerName;
 	string boardFileName;
-	unsigned int turn = rand()%2;
+	unsigned int turn = rand() % 2;
 	time_t timer;
-		
-	ShowMenu();
 
 	cout << "Qual e o nome do jogador 1?\nNome: ";
 	cin >> playerName;
@@ -64,7 +61,7 @@ int main()
 		string targetString;
 		if (turn % 2 == 0) // JOGADOR 1
 		{
-			cout << "JOGADOR 1 - " << player1.GetName() <<"\n\n";
+			cout << "JOGADOR 1 - " << player1.GetName() << "\n\n";
 			player2.showBoard();
 			cout << player2.GetName() << ", para onde quer enviar a bomba?\n";
 			timer = time(NULL);
@@ -76,7 +73,7 @@ int main()
 		}
 		else  //JOGADOR 2
 		{
-			cout << "JOGADOR 2 - " << player2.GetName() <<"\n\n";
+			cout << "JOGADOR 2 - " << player2.GetName() << "\n\n";
 			player1.showBoard();
 			cout << player2.GetName() << ", para onde quer enviar a bomba?\n";
 			timer = time(NULL);
@@ -85,7 +82,7 @@ int main()
 			player1.AddTimeElapsed(timer);
 			player1.attackBoard(player2.getBomb(targetString));
 			player1.showBoard();
-		} 
+		}
 		turn++;
 		WaitForEnter();
 		ClearScreen();
@@ -95,7 +92,24 @@ int main()
 		cout << "Parabens. O jogador 2 venceu!\n";
 	else
 		cout << "Parabens. O jogador 1 venceu!\n";
+}
 
+int main()
+{
+	switch (Menu())
+	{
+	case 1:
+		ClearScreen();
+		Play();
+		break;
+	case 2:
+		ClearScreen();
+		break;
+	case 3:
+		return 0;
+	default:
+		return 1;
+	}
 
 	return 0;
 }
