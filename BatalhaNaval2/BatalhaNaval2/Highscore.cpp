@@ -11,7 +11,7 @@ const unsigned int NAME_SIZE = 10;
 const unsigned int TIME_SIZE = 10;
 const unsigned int HIGHSCORE_SIZE = 10;
 
-//==========================================================================================//
+//========================================================================================= //
 //Highscore Default Constructor
 //Reads the highscore binary file and fills the "scores" vector.
 
