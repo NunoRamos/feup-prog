@@ -14,7 +14,7 @@ public:
 	Highscore();
 	Score operator[] (unsigned int index) const;
 	bool Highscore::InsertScore(const Score &score);
-
+	~Highscore();
 private:
 	vector<Score> scores;
 };
