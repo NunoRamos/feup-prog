@@ -19,5 +19,6 @@ Highscore::Highscore()
 	{
 		file.readsome(name, NAME_SIZE);
 		file.readsome(score, TIME_SIZE);
+		//ok percebi
 	}
 }
