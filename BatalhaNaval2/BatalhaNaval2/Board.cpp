@@ -245,7 +245,6 @@ int Board::Attack(const Bomb &b)
 
 	if (board.at(bombPosition.lin).at(bombPosition.col) != -1)
 	{
-
 		int shipIndex = board.at(bombPosition.lin).at(bombPosition.col);
 		size_t i = 0;
 		char orientation = ships.at(shipIndex).GetShipOrientation();
@@ -278,9 +277,10 @@ int Board::Attack(const Bomb &b)
 		if (ships.at(board.at(bombPosition.lin).at(bombPosition.col)).IsDestroyed())
 			return -1;
 
-		ships.at(board.at(bombPosition.lin).at(bombPosition.col)).Attack(i);
-
-		return shipIndex;
+		if (!ships.at(board.at(bombPosition.lin).at(bombPosition.col)).Attack(i))
+			return -2;
+		else
+			return shipIndex;
 	}
 
 	return -1;

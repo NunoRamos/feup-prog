@@ -103,6 +103,11 @@ void Player::AttackBoard(const Bomb &b)
 	if (shipAttack == -1)
 		cout << "You have missed the ship.\n\n";
 	else
+		if (shipAttack == -2)
+		{
+			cout << "You have hit a part of a ship that had already been destroyed.\n\n";
+		}
+	else
 	{
 		Ship attackedShip = board.GetShip(shipAttack);
 		PositionChar position = ConvertToPositionChar(attackedShip.GetShipPosition());

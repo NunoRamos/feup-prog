@@ -49,6 +49,8 @@ void BoardSetup(Player &player1, Player &player2)
 	cin >> playerName;
 	cout << "What is the board file name?\nName: ";
 	cin >> boardFileName;
+	if (boardFileName.find(".txt") == -1)
+		boardFileName = boardFileName + ".txt";
 	player1 = Player(playerName, boardFileName);
 
 	cout << endl;
@@ -60,6 +62,8 @@ void BoardSetup(Player &player1, Player &player2)
 	cin >> playerName;
 	cout << "What is the board file name?\nName: ";
 	cin >> boardFileName;
+	if (boardFileName.find(".txt") == -1)
+		boardFileName = boardFileName + ".txt";
 	player2 = Player(playerName, boardFileName);
 
 	cout << endl;
@@ -87,7 +91,7 @@ void Play(Player &player1, Player &player2)
 		{
 			cout << "PLAYER 1 - " << player1.GetName() << "\n\n";
 			player2.ShowBoard();
-			cout << player2.GetName() << ", where do you want to send the bomb?\n";
+			cout << player1.GetName() << ", where do you want to send the bomb?\n";
 			timer = time(NULL);
 			cin >> targetString;
 			timer = time(NULL) - timer;
