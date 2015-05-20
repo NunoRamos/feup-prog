@@ -11,7 +11,7 @@ Highscore::Highscore()
 	fstream file;
 	string name;
 	time_t score;
-	char[] 
+	char[];
 		
 	file.open("highscore.dat", ios::binary);
 	
