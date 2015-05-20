@@ -9,9 +9,9 @@ const unsigned int HIGHSCORE_SIZE = 10;
 Highscore::Highscore()
 {
 	fstream file;
-	string name;
-	time_t score;
-	char[] 
+	char name[NAME_SIZE], score[HIGHSCORE_SIZE];
+	Score temp;
+	
 		
 	file.open("highscore.dat", ios::binary);
 	
@@ -20,7 +20,23 @@ Highscore::Highscore()
 	{
 		file.readsome(name, NAME_SIZE);
 		file.readsome(score, TIME_SIZE);
-		
+		temp.name = name;
+		temp.score = stoi(score);
+		scores.push_back(temp);
 	}
-	
+
+	file.close();
+}
+
+Score Highscore::operator[] (unsigned int index)
+{
+	return scores.at(index);
+}
+
+bool Highscore::InsertScore(Score score)
+{
+	for (size_t i = 0; i < scores.size(); i++)
+	{
+
+	}
 }

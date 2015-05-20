@@ -12,10 +12,10 @@ class Highscore
 {
 public:
 	Highscore();
-		
-
+	Score operator[](unsigned int index);
+	bool InsertScore(Score score);
 private:
-	vector<Score> scores();
+	vector<Score> scores;
 };
 
 #endif
