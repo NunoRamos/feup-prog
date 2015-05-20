@@ -6,10 +6,7 @@
 
 Player::Player()
 {
-	name = "Player";
-	board = Board("board.txt");
-	shipsLeft = board.ShipsLeft();
-	timeElapsed = 0;
+
 }
 
 Player::Player(string playerName, string boardFileName)
@@ -25,7 +22,7 @@ void Player::ShowBoard() const
 	board.Display();
 }
 
-bool Player::FleetDestroyed() const
+bool Player::IsFleetDestroyed() const
 {
 	if (shipsLeft == 0)
 		return true;

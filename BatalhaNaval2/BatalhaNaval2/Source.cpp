@@ -30,44 +30,49 @@ int Menu()
 	return option;
 }
 
-void Play()
+void BoardSetup(Player &player1, Player &player2)
 {
-	srand((unsigned int)time(NULL));
 	string playerName;
 	string boardFileName;
-	unsigned int turn = rand() % 2;
-	time_t timer;
 
-	cout << "Qual e o nome do jogador 1?\nNome: ";
+	cout << "What is the 1st player's name?\nName: ";
 	cin >> playerName;
-	cout << "Qual o nome do ficheiro de tabuleiro?\nNome: ";
+	cout << "What is the board file name?\nName: ";
 	cin >> boardFileName;
-	Player player1 = Player(playerName, boardFileName);
+	player1 = Player(playerName, boardFileName);
 
 	cout << endl;
 	player1.ShowBoard();
 	WaitForEnter();
 	ClearScreen();
 
-	cout << "Qual e o nome do jogador 2?\nNome: ";
+	cout << "What is the 2nd player's name?\nName: ";
 	cin >> playerName;
-	cout << "Qual o nome do ficheiro de tabuleiro?\nNome: ";
+	cout << "What is the board file name?\nName: ";
 	cin >> boardFileName;
-	Player player2 = Player(playerName, boardFileName);
+	player2 = Player(playerName, boardFileName);
 
 	cout << endl;
 	player2.ShowBoard();
 	WaitForEnter();
 	ClearScreen();
+}
 
-	while (!player1.FleetDestroyed() && !player2.FleetDestroyed())
+void Play(Player &player1, Player &player2)
+{
+	srand((unsigned int)time(NULL));
+	unsigned int turn = rand() % 2;
+	time_t timer;
+
+
+	while (!player1.IsFleetDestroyed() && !player2.IsFleetDestroyed())
 	{
 		string targetString;
 		if (turn % 2 == 0) // JOGADOR 1
 		{
-			cout << "JOGADOR 1 - " << player1.GetName() << "\n\n";
+			cout << "PLAYER 1 - " << player1.GetName() << "\n\n";
 			player2.ShowBoard();
-			cout << player2.GetName() << ", para onde quer enviar a bomba?\n";
+			cout << player2.GetName() << ", where do you want to send the bomb?\n";
 			timer = time(NULL);
 			cin >> targetString;
 			timer = time(NULL) - timer;
@@ -77,9 +82,9 @@ void Play()
 		}
 		else  //JOGADOR 2
 		{
-			cout << "JOGADOR 2 - " << player2.GetName() << "\n\n";
+			cout << "PLAYER 2 - " << player2.GetName() << "\n\n";
 			player1.ShowBoard();
-			cout << player2.GetName() << ", para onde quer enviar a bomba?\n";
+			cout << player2.GetName() << ", where do you want to send the bomb?\n";
 			timer = time(NULL);
 			cin >> targetString;
 			timer = time(NULL) - timer;
@@ -92,22 +97,24 @@ void Play()
 		ClearScreen();
 	}
 
-	if (player1.FleetDestroyed())
-		cout << "Parabens. O jogador 2 venceu!\n";
+	if (player1.IsFleetDestroyed())
+		cout << "Congratulations. Player 2 has won!\n";
 	else
-		cout << "Parabens. O jogador 1 venceu!\n";
+		cout << "Congratulations. Player 1 has won!\n";
 }
 
 int main()
 {
 	Highscore highscore;
+	Player player1, player2;
 
 	while (true)
 	{
 		switch (Menu())
 		{
 		case 1:
-			Play();
+			BoardSetup(player1, player2);
+			Play(player1, player2);
 			break;
 		case 2:
 			highscore.ShowHighscore();

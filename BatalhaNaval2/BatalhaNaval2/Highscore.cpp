@@ -24,7 +24,7 @@ Highscore::Highscore()
 
 	if (file.is_open())
 	{
-//		file.seekg(ios::beg);
+		//		file.seekg(ios::beg);
 		file.peek();
 		while (!file.eof() && i < 10)
 		{
@@ -46,6 +46,7 @@ Highscore::Highscore()
 	}
 
 	file.close();
+	hasChanged = false;
 }
 
 Score Highscore::operator[] (unsigned int index) const
@@ -53,27 +54,27 @@ Score Highscore::operator[] (unsigned int index) const
 	return scores.at(index);
 }
 
-bool Highscore::InsertScore(const Score &score)
+void Highscore::InsertScore(const Score &score)
 {
 	int i = 0;
 
 	if (scores.size() == 0)
 	{
 		scores.push_back(score);
-		return true;
+		hasChanged = true;
 	}
-
-	for (i = 0; i < scores.size(); i++)
+	else
 	{
-		if (score.score < scores.at(i).score)
+		for (i = 0; i < scores.size(); i++)
 		{
-			scores.insert(scores.begin() + i, score);
-			if (scores.size() > 10)
-				scores.pop_back();
-			if (i == 9)
-				return false;
-			else
-				return true;
+			if (score.score < scores.at(i).score)
+			{
+				scores.insert(scores.begin() + i, score);
+				if (scores.size() > 10)
+					scores.pop_back();
+				if (i != 9)
+					hasChanged = true;
+			}
 		}
 	}
 }
@@ -113,19 +114,20 @@ void Highscore::AddScore(string name, time_t score)
 
 Highscore::~Highscore()
 {
-	ofstream file;
-	char buffer[TIME_SIZE];
-
-	file.open(HIGHSCORE_FILENAME, ios::binary);
-
-	int size = file.end - file.beg;
-
-	for (size_t i = 0; i < scores.size(); i++)
+	if (hasChanged)
 	{
-		file.write(scores.at(i).name.c_str(), NAME_SIZE);
-		itoa(scores.at(i).score, buffer, 10);
-		file.write(buffer, TIME_SIZE);
-	}
+		ofstream file;
+		char buffer[TIME_SIZE];
 
-	file.close();
+		file.open(HIGHSCORE_FILENAME, ios::binary);
+
+		for (size_t i = 0; i < scores.size(); i++)
+		{
+			file.write(scores.at(i).name.c_str(), NAME_SIZE);
+			itoa(scores.at(i).score, buffer, 10);
+			file.write(buffer, TIME_SIZE);
+		}
+
+		file.close();
+	}
 }
