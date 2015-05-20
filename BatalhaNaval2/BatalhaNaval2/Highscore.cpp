@@ -12,7 +12,7 @@ Highscore::Highscore()
 	string name;
 	time_t score;
 	char[] 
-		//mudei algula cena
+		
 	file.open("highscore.dat", ios::binary);
 
 	while (!file.eof())
