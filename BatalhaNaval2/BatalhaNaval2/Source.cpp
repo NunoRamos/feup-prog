@@ -81,7 +81,7 @@ void BoardSetup(Player &player1, Player &player2)
 void Play(Player &player1, Player &player2)
 {
 	srand((unsigned int)time(NULL));
-	unsigned int turn = rand() % 2;
+	unsigned int turn = rand() % 2 + 2;
 	time_t timer;
 
 
@@ -90,7 +90,7 @@ void Play(Player &player1, Player &player2)
 		string targetString;
 		if (turn % 2 == 0) // JOGADOR 1
 		{
-			cout << "PLAYER 1 - " << player1.GetName() << "\n\n";
+			cout << "PLAYER 1 - " << player1.GetName() << " - TURN " << turn / 2 << "\n\n";
 			player2.ShowBoard();
 			cout << player1.GetName() << ", where do you want to send the bomb?\n";
 			timer = time(NULL);
@@ -102,7 +102,7 @@ void Play(Player &player1, Player &player2)
 		}
 		else  //JOGADOR 2
 		{
-			cout << "PLAYER 2 - " << player2.GetName() << "\n\n";
+			cout << "PLAYER 2 - " << player2.GetName() << " - TURN " << turn / 2 << "\n\n";;
 			player1.ShowBoard();
 			cout << player2.GetName() << ", where do you want to send the bomb?\n";
 			timer = time(NULL);

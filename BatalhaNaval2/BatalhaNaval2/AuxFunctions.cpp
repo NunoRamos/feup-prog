@@ -123,3 +123,13 @@ int Minimum(int n1, int n2)
 	else
 		return n2;
 }
+
+void NormalizeTargetString(std::string &targetString)
+{
+	targetString.resize(2);
+
+	if (targetString.at(0) >= 'a' && targetString.at(0) <= 'z')
+		targetString.at(0) = targetString.at(0) - 32;
+	if (targetString.at(1) >= 'A' && targetString.at(1) <= 'Z')
+		targetString.at(1) = targetString.at(1) + 32;
+}

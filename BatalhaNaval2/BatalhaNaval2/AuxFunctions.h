@@ -2,6 +2,7 @@
 #define AUXFUNCTIONS_H
 
 #include "Position.h"
+#include <string>
 
 PositionInt ConvertToPositionInt(PositionChar position); //Converts PositionChar to PositionInt.
 
@@ -18,5 +19,7 @@ void SetColor(unsigned int color, unsigned int background_color); //Sets text an
 int Maximum(int n1, int n2);
 
 int Minimum(int n1, int n2);
+
+void NormalizeTargetString(std::string &targetString);
 
 #endif
