@@ -65,6 +65,8 @@ Bomb Player::GetBomb(string targetString) const
 {
 	PositionChar target;
 
+	targetString.at(0) = toupper(targetString.at(0));
+
 	target.lin = targetString.at(0);
 	target.col = targetString.at(1);
 

@@ -46,7 +46,8 @@ void BoardSetup(Player &player1, Player &player2)
 	string boardFileName;
 
 	cout << "What is the 1st player's name?\nName: ";
-	cin >> playerName;
+	cin.ignore(1000, '\n');
+	getline(cin, playerName);
 	cout << "What is the board file name?\nName: ";
 	cin >> boardFileName;
 	if (boardFileName.find(".txt") == -1)
@@ -59,7 +60,7 @@ void BoardSetup(Player &player1, Player &player2)
 	ClearScreen();
 
 	cout << "What is the 2nd player's name?\nName: ";
-	cin >> playerName;
+	getline(cin, playerName);
 	cout << "What is the board file name?\nName: ";
 	cin >> boardFileName;
 	if (boardFileName.find(".txt") == -1)

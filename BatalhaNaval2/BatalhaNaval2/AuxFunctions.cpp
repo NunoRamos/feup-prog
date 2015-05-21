@@ -47,7 +47,7 @@ void WaitForUserInput()
 	string dummy;
 	cout << "Press any key to continue . . .\n";
 	cin.ignore(1000, '\n');
-	cin.get();
+	getline(cin, dummy);
 }
 
 //==========================================================================================//
