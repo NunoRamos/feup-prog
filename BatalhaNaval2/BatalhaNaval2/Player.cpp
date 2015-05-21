@@ -99,15 +99,17 @@ void Player::AddTimeElapsed(time_t time)
 
 void Player::AttackBoard(const Bomb &b)
 {
+	PositionChar bombPosition = b.GetTargetPosition();
+
 	board.MoveShips();
 	board.Update();
 	int shipAttack = board.Attack(b);
 	if (shipAttack == -1)
-		cout << "You have missed the ship.\n\n";
+		cout << "You have missed the ship.";
 	else
 		if (shipAttack == -2)
 		{
-			cout << "You have hit a part of a ship that had already been destroyed.\n\n";
+			cout << "You have hit a part of a ship that had already been destroyed.";
 		}
 	else
 	{
@@ -118,8 +120,10 @@ void Player::AttackBoard(const Bomb &b)
 		else
 			position.col += attackedShip.GetLastPartDestroyed();
 
-		cout << "You have hit " << attackedShip.GetShipSymbol() << " at " << position.lin << position.col << ".\n\n";
+		cout << "You have hit " << attackedShip.GetShipSymbol() << ".";
 	}
+
+	cout << "\nThe bomb fell at " << bombPosition.lin << bombPosition.col << ".\n\n";
 
 	shipsLeft = board.GetShipsLeft();
 }

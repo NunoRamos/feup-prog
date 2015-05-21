@@ -258,9 +258,6 @@ int Board::Attack(const Bomb &b)
 {
 	PositionInt bombPosition = ConvertToPositionInt(b.GetTargetPosition());
 
-	if (bombPosition.col > numColumns || bombPosition.lin > numLines)
-		return -1;
-
 	if (board.at(bombPosition.lin).at(bombPosition.col) != -1)
 	{
 		int shipIndex = board.at(bombPosition.lin).at(bombPosition.col);

@@ -33,10 +33,10 @@ Bomb::Bomb(PositionChar targetPosition, unsigned int maxLines, unsigned int maxC
 		break;
 	}
 
-	targetColumn = Maximum(targetColumn, 0);
-	targetLine = Maximum(targetLine, 0);
-	targetColumn = Minimum(targetColumn, maxColumns);
-	targetLine = Minimum(targetLine, maxLines);
+	targetColumn = Maximum(targetColumn, 'a');
+	targetLine = Maximum(targetLine, 'A');
+	targetColumn = Minimum(targetColumn, maxColumns + 'a');
+	targetLine = Minimum(targetLine, maxLines + 'A');
 	
 }
 
