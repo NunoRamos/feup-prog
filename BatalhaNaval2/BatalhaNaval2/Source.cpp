@@ -98,7 +98,7 @@ void BoardSetup(Player &player1, Player &player2)
 //Takes care of the general aspect of the game: whose turn it is, if a player has won, etc.
 //Returns nothing.
 
-void Play(Player &player1, Player &player2)
+void Play(Player &player1, Player &player2, Highscore &highscore)
 {
 	srand((unsigned int)time(NULL));
 	unsigned int turn = rand() % 2 + 2;
@@ -137,9 +137,16 @@ void Play(Player &player1, Player &player2)
 	}
 
 	if (player1.IsFleetDestroyed())
+	{
 		cout << "Congratulations! Player 2 has won!\n";
+		highscore.InsertScore(player2.GetScore());
+	}
 	else
+	{ 
 		cout << "Congratulations! Player 1 has won!\n";
+		highscore.InsertScore(player1.GetScore());
+	}
+
 	WaitForUserInput();
 }
 
@@ -159,7 +166,7 @@ int main()
 		{
 		case 1:
 			BoardSetup(player1, player2);
-			Play(player1, player2);
+			Play(player1, player2, highscore);
 			break;
 		case 2:
 			highscore.ShowHighscore();

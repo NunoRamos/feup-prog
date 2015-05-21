@@ -60,6 +60,20 @@ string Player::GetName() const
 }
 
 //==========================================================================================//
+//Get Score
+//Returns the player's score as a struct.
+
+Score Player::GetScore() const
+{
+	Score temp;
+
+	temp.name = name;
+	temp.score = timeElapsed;
+
+	return temp;
+}
+
+//==========================================================================================//
 //Get Bomb
 //Creates a bomb depending on the target provided by the user.
 //Returns a bomb.
@@ -137,3 +151,4 @@ void Player::AttackBoard(const Bomb &b)
 
 	shipsLeft = board.GetShipsLeft();
 }
+

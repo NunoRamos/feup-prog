@@ -3,6 +3,7 @@
 
 #include "Bomb.h"
 #include "Board.h"
+#include "Score.h"
 
 #include<string>
 
@@ -17,6 +18,7 @@ public:
 	Bomb GetBomb(string targetString) const; // asks bomb target coordinates and creates the bomb
 	bool IsFleetDestroyed() const; // checks if player's fleet is destroyed
 	string GetName() const;
+	Score GetScore() const;
 	time_t GetTimeElapsed() const;
 	void AddTimeElapsed(time_t time);
 	void AttackBoard(const Bomb &b); // "receives" a bomb from the opponent;
