@@ -109,7 +109,6 @@ void Play(Player &player1, Player &player2)
 	unsigned int turn = rand() % 2 + 2;
 	time_t timer;
 
-
 	while (!player1.IsFleetDestroyed() && !player2.IsFleetDestroyed())
 	{
 		string targetString;
@@ -127,7 +126,7 @@ void Play(Player &player1, Player &player2)
 		}
 		else  //JOGADOR 2
 		{
-			cout << "PLAYER 2 - " << player2.GetName() << " - TURN " << turn / 2 << "\n\n";;
+			cout << "PLAYER 2 - " << player2.GetName() << " - TURN " << turn / 2 << "\n\n";
 			player1.ShowBoard();
 			cout << player2.GetName() << ", where do you want to send the bomb?\n";
 			timer = time(NULL);
@@ -143,9 +142,10 @@ void Play(Player &player1, Player &player2)
 	}
 
 	if (player1.IsFleetDestroyed())
-		cout << "Congratulations. Player 2 has won!\n";
+		cout << "Congratulations! Player 2 has won!\n";
 	else
-		cout << "Congratulations. Player 1 has won!\n";
+		cout << "Congratulations! Player 1 has won!\n";
+	WaitForUserInput();
 }
 
 //==========================================================================================//
