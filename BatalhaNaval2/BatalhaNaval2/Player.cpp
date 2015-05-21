@@ -120,7 +120,14 @@ void Player::AttackBoard(const Bomb &b)
 		else
 			position.col += attackedShip.GetLastPartDestroyed();
 
-		cout << "You have hit " << attackedShip.GetShipSymbol() << ".";
+		cout << "You have hit ";
+		SetColor(attackedShip.GetShipColor());
+		cout << attackedShip.GetShipSymbol();
+		SetColor(15);
+		cout << ".";
+
+		if (attackedShip.IsDestroyed())
+			cout << "\nYou have sunk the ship.";
 	}
 
 	cout << "\nThe bomb fell at " << bombPosition.lin << bombPosition.col << ".\n\n";
