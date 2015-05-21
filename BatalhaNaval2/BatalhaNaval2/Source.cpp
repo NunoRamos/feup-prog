@@ -95,6 +95,7 @@ void BoardSetup(Player &player1, Player &player2)
 	player2.ShowBoard();
 	WaitForUserInput();
 	ClearScreen();
+
 }
 
 //==========================================================================================//
