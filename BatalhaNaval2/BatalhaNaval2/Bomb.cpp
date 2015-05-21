@@ -6,10 +6,9 @@
 //Bomb Constructor
 //Tries to randomly change the bomb target.
 
-Bomb::Bomb(PositionChar targetPosition)
+Bomb::Bomb(PositionChar targetPosition, unsigned int maxLines, unsigned int maxColumns)
 {
-
-
+	
 	switch (rand() % 5)
 	{
 	case 0:
@@ -36,7 +35,9 @@ Bomb::Bomb(PositionChar targetPosition)
 
 	targetColumn = Maximum(targetColumn, 0);
 	targetLine = Maximum(targetLine, 0);
-
+	targetColumn = Minimum(targetColumn, maxColumns);
+	targetLine = Minimum(targetLine, maxLines);
+	
 }
 
 //==========================================================================================//

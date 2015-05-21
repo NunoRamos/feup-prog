@@ -51,7 +51,7 @@ bool Player::IsFleetDestroyed() const
 //Get Name
 //Returns the player's name.
 
-string Player::GetName()
+string Player::GetName() const
 {
 	return name;
 }
@@ -70,7 +70,7 @@ Bomb Player::GetBomb(string targetString) const
 	target.lin = targetString.at(0);
 	target.col = targetString.at(1);
 
-	Bomb bomb(target);
+	Bomb bomb(target, board.GetLines(), board.GetColumns());
 
 	return bomb;
 }

@@ -15,7 +15,7 @@ class Board
 public:
 	Board();
 	Board(const string &filename); // loads board from file 'filename'
-	Ship GetShip(unsigned int shipIndex);
+	Ship GetShip(unsigned int shipIndex) const;
 
 	void MoveShips(); // tries to randmonly move all the ships of the fleet
 	bool MoveShip(unsigned int shipIndex);
@@ -27,7 +27,9 @@ public:
 	
 	int Attack(const Bomb &b);
 	
-	unsigned int GetShipsLeft();
+	unsigned int GetShipsLeft() const;
+	unsigned int GetColumns() const;
+	unsigned int GetLines() const;
 	
 	void Display() const; // displays the colored board during the game
 
