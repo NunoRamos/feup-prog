@@ -98,6 +98,8 @@ void SetColor(unsigned int color, unsigned int background_color)
 		SetConsoleTextAttribute(hCon, color | BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED);
 }
 
+
+
 //==========================================================================================//
 //Maximum
 //Returns the greatest number between n1 and n2.
