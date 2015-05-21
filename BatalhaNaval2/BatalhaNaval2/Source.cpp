@@ -122,7 +122,7 @@ void Play(Player &player1, Player &player2)
 		}
 		else  //JOGADOR 2
 		{
-			cout << "PLAYER 2 - " << player2.GetName() << " - TURN " << turn / 2 << "\n\n";;
+			cout << "PLAYER 2 - " << player2.GetName() << " - TURN " << turn / 2 << "\n\n";
 			player1.ShowBoard();
 			cout << player2.GetName() << ", where do you want to send the bomb?\n";
 			timer = time(NULL);
