@@ -180,9 +180,17 @@ bool Board::MoveShip(unsigned int shipIndex)
 
 	if (placeInOldPosition)
 	{
-		board = originalBoard;
 		ships.at(shipIndex).SetShipPosition(originalPosition);
 		ships.at(shipIndex).SetShipOrientation(originalOrientation);
+		if (CanPlaceShip(ships.at(shipIndex)))
+			board = originalBoard;
+		else
+		{
+			do
+			{
+				ships.at(shipIndex).MoveRand(0, 0, numLines - 1, numColumns - 1);
+			} while (!PutShip(ships.at(shipIndex), shipIndex));
+		}
 		return false;
 	}
 
