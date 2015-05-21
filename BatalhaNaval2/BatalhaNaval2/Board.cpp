@@ -90,13 +90,12 @@ bool Board::PutShip(const Ship &s, int shipIndex)
 	if (s.GetShipOrientation() == 'V')
 	{
 		//If the ship has already been destroyed, write -1.
-		if (s.IsDestroyed())
-		{
+		
 			for (unsigned int i = 0; i < s.GetShipSize(); i++)
 			{
 				board.at(shipPosition.lin + i).at(shipPosition.col) = -1;
 			}
-		}
+
 
 		if (!CanPlaceShip(s))
 			return false;
@@ -110,8 +109,7 @@ bool Board::PutShip(const Ship &s, int shipIndex)
 	else
 	{
 		//If the ships has already been destroyed, write -1.
-		if (s.IsDestroyed())
-		{
+		
 			for (unsigned int i = 0; i < s.GetShipSize(); i++)
 			{
 				board.at(shipPosition.lin).at(shipPosition.col + i) = -1;
@@ -126,7 +124,7 @@ bool Board::PutShip(const Ship &s, int shipIndex)
 		{
 			board.at(shipPosition.lin).at(shipPosition.col + i) = shipIndex;
 		}
-	}
+	
 
 	return true;
 }
@@ -218,7 +216,8 @@ void Board::MoveShips()
 {
 	for (size_t i = 0; i < ships.size(); i++)
 	{
-		MoveShip(i);
+		if (!ships.at(i).IsDestroyed())
+			MoveShip(i);
 	}
 }
 
@@ -312,7 +311,8 @@ void Board::Update()
 
 	for (size_t i = 0; i < ships.size(); i++)
 	{
-		PutShip(ships.at(i), i);
+		if (!ships.at(i).IsDestroyed())
+			PutShip(ships.at(i), i);
 	}
 }
 

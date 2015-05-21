@@ -112,7 +112,7 @@ void Player::AttackBoard(const Bomb &b)
 	else
 		if (shipAttack == -2)
 		{
-			cout << "You have hit a part of a ship that had already been destroyed.";
+			cout << "You have hit a part of a ship that had already been damaged.";
 		}
 	else
 	{
