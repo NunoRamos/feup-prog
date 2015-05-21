@@ -35,8 +35,8 @@ Bomb::Bomb(PositionChar targetPosition, unsigned int maxLines, unsigned int maxC
 
 	targetColumn = Maximum(targetColumn, 'a');
 	targetLine = Maximum(targetLine, 'A');
-	targetColumn = Minimum(targetColumn, maxColumns + 'a');
-	targetLine = Minimum(targetLine, maxLines + 'A');
+	targetColumn = Minimum(targetColumn, maxColumns + 'a' -1);
+	targetLine = Minimum(targetLine, maxLines + 'A'-1);
 	
 }
 

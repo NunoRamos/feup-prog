@@ -35,6 +35,20 @@ int Menu()
 	return option;
 }
 
+bool DoesFileExist(string filename)
+{
+	ifstream file;
+
+	file.open(filename);
+	if (file.fail())
+	{
+		cout << "File does not exist.\n";
+		return false;
+	}
+	return true;
+}
+
+
 //==========================================================================================//
 //Board Setup
 //Ask the user(s) the players' name and the board files name.
@@ -49,9 +63,12 @@ void BoardSetup(Player &player1, Player &player2)
 	cin.ignore(1000, '\n');
 	getline(cin, playerName);
 	cout << "What is the board file name?\nName: ";
-	cin >> boardFileName;
-	if (boardFileName.find(".txt") == -1)
-		boardFileName = boardFileName + ".txt";
+	do
+	{
+		cin >> boardFileName;
+		if (boardFileName.find(".txt") == -1)
+			boardFileName = boardFileName + ".txt";
+	} while (!DoesFileExist(boardFileName));
 	player1 = Player(playerName, boardFileName);
 
 	cout << endl;
@@ -62,9 +79,12 @@ void BoardSetup(Player &player1, Player &player2)
 	cout << "What is the 2nd player's name?\nName: ";
 	getline(cin, playerName);
 	cout << "What is the board file name?\nName: ";
-	cin >> boardFileName;
-	if (boardFileName.find(".txt") == -1)
-		boardFileName = boardFileName + ".txt";
+	do
+	{
+		cin >> boardFileName;
+		if (boardFileName.find(".txt") == -1)
+			boardFileName = boardFileName + ".txt";
+	} while (!DoesFileExist(boardFileName));
 	player2 = Player(playerName, boardFileName);
 
 	cout << endl;
