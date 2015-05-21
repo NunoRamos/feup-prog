@@ -104,7 +104,6 @@ void Play(Player &player1, Player &player2)
 	unsigned int turn = rand() % 2 + 2;
 	time_t timer;
 
-
 	while (!player1.IsFleetDestroyed() && !player2.IsFleetDestroyed())
 	{
 		string targetString;
@@ -138,9 +137,10 @@ void Play(Player &player1, Player &player2)
 	}
 
 	if (player1.IsFleetDestroyed())
-		cout << "Congratulations. Player 2 has won!\n";
+		cout << "Congratulations! Player 2 has won!\n";
 	else
-		cout << "Congratulations. Player 1 has won!\n";
+		cout << "Congratulations! Player 1 has won!\n";
+	WaitForUserInput();
 }
 
 //==========================================================================================//
