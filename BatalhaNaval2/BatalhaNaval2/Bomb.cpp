@@ -34,8 +34,8 @@ Bomb::Bomb(PositionChar targetPosition)
 		break;
 	}
 
-	targetColumn = Minimum(targetColumn, 0);
-	targetLine = Minimum(targetLine, 0);
+	targetColumn = Maximum(targetColumn, 0);
+	targetLine = Maximum(targetLine, 0);
 
 }
 
