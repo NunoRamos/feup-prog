@@ -97,3 +97,27 @@ void SetColor(unsigned int color, unsigned int background_color)
 		SetConsoleTextAttribute(hCon, color); else
 		SetConsoleTextAttribute(hCon, color | BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED);
 }
+
+//==========================================================================================//
+//Maximum
+//Returns the greatest number between n1 and n2.
+
+int Maximum(int n1, int n2)
+{
+	if (n1 > n2)
+		return n1;
+	else
+		return n2;
+}
+
+//==========================================================================================//
+//Minimum
+//Returns the smallest number between n1 and n2.
+
+int Minimum(int n1, int n2)
+{
+	if (n1 < n2)
+		return n1;
+	else
+		return n2;
+}
