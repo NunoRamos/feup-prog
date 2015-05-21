@@ -62,10 +62,12 @@ void BoardSetup(Player &player1, Player &player2)
 	cout << "What is the 1st player's name?\nName: ";
 	cin.ignore(1000, '\n');
 	getline(cin, playerName);
-	cout << "What is the board file name?\nName: ";
+	cout << "What is the board file name? Press Ctrl+Z to quit.\nName: ";
 	do
 	{
 		cin >> boardFileName;
+		if (cin.eof())
+			exit(1);
 		if (boardFileName.find(".txt") == -1)
 			boardFileName = boardFileName + ".txt";
 	} while (!DoesFileExist(boardFileName));
@@ -82,6 +84,8 @@ void BoardSetup(Player &player1, Player &player2)
 	do
 	{
 		cin >> boardFileName;
+		if (cin.eof())
+			exit(1);
 		if (boardFileName.find(".txt") == -1)
 			boardFileName = boardFileName + ".txt";
 	} while (!DoesFileExist(boardFileName));
@@ -91,6 +95,7 @@ void BoardSetup(Player &player1, Player &player2)
 	player2.ShowBoard();
 	WaitForUserInput();
 	ClearScreen();
+
 }
 
 //==========================================================================================//
