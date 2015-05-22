@@ -119,7 +119,7 @@ void Player::AttackBoard(const Bomb &b)
 	PositionChar bombPosition = b.GetTargetPosition();
 
 	board.MoveShips();
-	board.Update();
+	//board.Update();
 	int shipAttack = board.Attack(b);
 	if (shipAttack == -1)
 		cout << "You have missed the ship.";
