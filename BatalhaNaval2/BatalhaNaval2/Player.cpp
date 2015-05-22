@@ -23,8 +23,7 @@ Player::Player(string playerName, string boardFileName)
 		name = playerName;
 	else
 		name = "Player";
-	//board = Board(boardFileName);
-	board = Board();
+	board = Board(boardFileName);
 	shipsLeft = board.GetShipsLeft();
 	timeElapsed = 0;
 }

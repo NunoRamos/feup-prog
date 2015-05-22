@@ -14,30 +14,7 @@ using namespace std;
 
 Board::Board()
 {
-	board.resize(10, vector<int>(10, -1));
-	numColumns = 10;
-	numLines = 10;
-	PositionChar position;
-	position.col = 'a';
-	position.lin = 'A';
-	ships.push_back(Ship('T', position, 'V', 3, 13));
-	position.col = 'b';
-	position.lin = 'B';
-	ships.push_back(Ship('C', position, 'H', 2, 14));
-	for (size_t i = 0; i < ships.size(); i++)
-	{
-		PutShip(ships.at(i), i);
-	}
-	Display();
-	WaitForUserInput();
-	RemoveShip(ships.at(1));
-	position.col = 'C';
-	position.lin = 'd';
-	ships.at(1).SetShipPosition(ConvertToPositionInt(position));
-	PutShip(ships.at(1),1);
-	Display();
-	WaitForUserInput();
-	exit(0);
+
 }
 
 //==========================================================================================//
