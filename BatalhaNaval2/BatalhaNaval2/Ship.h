@@ -29,6 +29,7 @@ public:
 	bool IsDestroyed() const; // checks whether the ship is destroyed
 private:
 	int lastPartDestroyed;
+	bool isDestroyed;
 	char symbol; // 'P' = "porta-aviões"; 'F' = "fragata"; … (portuguese names)
 	PositionInt position; // coordinates of the upper left corner of the ship
 	char orientation; // 'H' = horizontal; 'V' = vertical

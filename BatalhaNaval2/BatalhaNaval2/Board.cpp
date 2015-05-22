@@ -14,7 +14,30 @@ using namespace std;
 
 Board::Board()
 {
-
+	board.resize(10, vector<int>(10, -1));
+	numColumns = 10;
+	numLines = 10;
+	PositionChar position;
+	position.col = 'a';
+	position.lin = 'A';
+	ships.push_back(Ship('T', position, 'V', 3, 13));
+	position.col = 'b';
+	position.lin = 'B';
+	ships.push_back(Ship('C', position, 'H', 2, 14));
+	for (size_t i = 0; i < ships.size(); i++)
+	{
+		PutShip(ships.at(i), i);
+	}
+	Display();
+	WaitForUserInput();
+	RemoveShip(ships.at(1));
+	position.col = 'C';
+	position.lin = 'd';
+	ships.at(1).SetShipPosition(ConvertToPositionInt(position));
+	PutShip(ships.at(1),1);
+	Display();
+	WaitForUserInput();
+	exit(0);
 }
 
 //==========================================================================================//
@@ -46,7 +69,12 @@ Board::Board(const string &filename)
 
 	board.resize(numLines, vector<int>(numColumns, -1));
 
-	Update();
+	for (size_t i = 0; i < ships.size(); i++)
+	{
+		PutShip(ships.at(i), i);
+	}
+
+	//Update();
 }
 
 //==========================================================================================//
@@ -59,7 +87,6 @@ bool Board::CanPlaceShip(const Ship &s)
 {
 	if (s.GetShipOrientation() == 'V')
 	{
-		//Verifica se dá para acrescentar o navio
 		for (unsigned int i = 0; i < s.GetShipSize(); i++)
 		{
 			if (board.at(s.GetShipPosition().lin + i).at(s.GetShipPosition().col) != -1)
@@ -68,13 +95,14 @@ bool Board::CanPlaceShip(const Ship &s)
 	}
 	else
 	{
-		//Verifica se dá para acrescentar o navio
 		for (unsigned int i = 0; i < s.GetShipSize(); i++)
 		{
 			if (board.at(s.GetShipPosition().lin).at(s.GetShipPosition().col + i) != -1)
 				return false;
 		}
 	}
+
+	return true;
 }
 
 //==========================================================================================//
@@ -90,12 +118,14 @@ bool Board::PutShip(const Ship &s, int shipIndex)
 	if (s.GetShipOrientation() == 'V')
 	{
 		//If the ship has already been destroyed, write -1.
-		
+		if (s.IsDestroyed())
+		{
 			for (unsigned int i = 0; i < s.GetShipSize(); i++)
 			{
 				board.at(shipPosition.lin + i).at(shipPosition.col) = -1;
 			}
-
+			return false;
+		}
 
 		if (!CanPlaceShip(s))
 			return false;
@@ -109,7 +139,8 @@ bool Board::PutShip(const Ship &s, int shipIndex)
 	else
 	{
 		//If the ships has already been destroyed, write -1.
-		
+		if (s.IsDestroyed())
+		{
 			for (unsigned int i = 0; i < s.GetShipSize(); i++)
 			{
 				board.at(shipPosition.lin).at(shipPosition.col + i) = -1;
@@ -124,7 +155,7 @@ bool Board::PutShip(const Ship &s, int shipIndex)
 		{
 			board.at(shipPosition.lin).at(shipPosition.col + i) = shipIndex;
 		}
-	
+	}
 
 	return true;
 }
@@ -159,7 +190,7 @@ void Board::RemoveShip(const Ship &s)
 //If it cannot, the original configurations will be restored.
 //Returns true if the ship has been moved. Returns false otherwise.
 
-bool Board::MoveShip(unsigned int shipIndex)
+/*bool Board::MoveShip(unsigned int shipIndex)
 {
 	vector<vector<int>> originalBoard = board;
 	PositionInt originalPosition = ships.at(shipIndex).GetShipPosition();
@@ -191,6 +222,34 @@ bool Board::MoveShip(unsigned int shipIndex)
 				ships.at(shipIndex).MoveRand(0, 0, numLines - 1, numColumns - 1);
 			} while (!PutShip(ships.at(shipIndex), shipIndex));
 		}
+		return false;
+	}
+
+	return true;
+}*/
+
+bool Board::MoveShip(unsigned int shipIndex)
+{
+	PositionInt originalPosition = ships.at(shipIndex).GetShipPosition();
+	char originalOrientation = ships.at(shipIndex).GetShipOrientation();
+
+	RemoveShip(ships.at(shipIndex));
+
+	if (ships.at(shipIndex).MoveRand(0, 0, numLines - 1, numColumns - 1))
+	{
+		if (!PutShip(ships.at(shipIndex), shipIndex))
+		{
+			ships.at(shipIndex).SetShipPosition(originalPosition);
+			ships.at(shipIndex).SetShipOrientation(originalOrientation);
+			PutShip(ships.at(shipIndex), shipIndex);
+			return false;
+		}
+	}
+	else
+	{
+		ships.at(shipIndex).SetShipPosition(originalPosition);
+		ships.at(shipIndex).SetShipOrientation(originalOrientation);
+		PutShip(ships.at(shipIndex), shipIndex);
 		return false;
 	}
 
@@ -313,7 +372,7 @@ int Board::Attack(const Bomb &b)
 //Update
 //Recreates the "board" vector and places every ship.
 
-void Board::Update()
+/*void Board::Update()
 {
 	board = vector<vector<int>>(numLines, vector<int>(numColumns, -1));
 
@@ -322,7 +381,7 @@ void Board::Update()
 		if (!ships.at(i).IsDestroyed())
 			PutShip(ships.at(i), i);
 	}
-}
+}*/
 
 //==========================================================================================//
 //Display
@@ -340,12 +399,12 @@ void Board::Display() const
 	cout << endl;
 
 
-	for (unsigned int i = 0; i < board.size(); i++)
+	for (unsigned int i = 0; i < numLines; i++)
 	{
 		SetColor(15);
 		cout << ' ' << (char)(65 + i);		//Adds the capitalized letter column to the left of the board.
 
-		for (unsigned int j = 0; j < board.at(0).size(); j++)
+		for (unsigned int j = 0; j < numColumns; j++)
 		{
 			if (board.at(i).at(j) == -1 || ships.at(board.at(i).at(j)).IsDestroyed())
 			{

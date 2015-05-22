@@ -23,7 +23,8 @@ Player::Player(string playerName, string boardFileName)
 		name = playerName;
 	else
 		name = "Player";
-	board = Board(boardFileName);
+	//board = Board(boardFileName);
+	board = Board();
 	shipsLeft = board.GetShipsLeft();
 	timeElapsed = 0;
 }
@@ -119,7 +120,7 @@ void Player::AttackBoard(const Bomb &b)
 	PositionChar bombPosition = b.GetTargetPosition();
 
 	board.MoveShips();
-	board.Update();
+	//board.Update();
 	int shipAttack = board.Attack(b);
 	if (shipAttack == -1)
 		cout << "You have missed the ship.";

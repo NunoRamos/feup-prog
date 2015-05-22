@@ -102,9 +102,28 @@ bool Ship::MoveRand(unsigned int lineMin, unsigned int columnMin, unsigned int
 {
 	PositionInt positionCopy;
 	char orientationTemp = orientation;
-
+	
 	positionCopy.lin = position.lin;
 	positionCopy.col = position.col;
+
+
+	if (rand() % 2 == 1)
+	{
+		if (orientation == 'H')
+		{
+			if (!positionCopy.lin + size > lineMax)
+				orientationTemp = 'V';
+		}
+		else if (orientation == 'V')
+		{
+			if (!positionCopy.col + size > columnMax)
+				orientationTemp = 'H';
+		}
+
+	}
+
+	orientation = orientationTemp;
+
 
 	switch (rand() % 5)
 	{
@@ -124,30 +143,10 @@ bool Ship::MoveRand(unsigned int lineMin, unsigned int columnMin, unsigned int
 		break;
 	}
 
-	switch (rand() % 2)
-	{
-	case 0:
-		break;
-	case 1:
-		if (orientation == 'H')
-		{
-			if (positionCopy.lin + size > lineMax)
-				return false;
-			else orientationTemp = 'V';
-		}
-		else if (orientation == 'V')
-		{
-			if (positionCopy.col + size > columnMax)
-				return false;
-			else orientationTemp = 'H';
-		}
 
-	}
-
-	if (positionCopy.lin < lineMin || positionCopy.lin >= lineMax || positionCopy.col < columnMin || positionCopy.col >= columnMax)
+	if (positionCopy.lin < lineMin || positionCopy.lin > lineMax || positionCopy.col < columnMin || positionCopy.col > columnMax)
 		return false;
 
-	orientation = orientationTemp;
 	position.lin = positionCopy.lin;
 	position.col = positionCopy.col;
 
