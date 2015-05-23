@@ -167,6 +167,23 @@ void Board::RemoveShip(const Ship &s)
 	}
 }
 
+unsigned int Board::GetShipsArea() const
+{
+	unsigned int sum = 0;
+
+	for (size_t i = 0; i < ships.size(); i++)
+	{
+		sum += ships.at(i).GetShipSize();
+	}
+
+	return sum;
+}
+
+unsigned int Board::GetBoardArea() const
+{
+	return numColumns*numLines;
+}
+
 //==========================================================================================//
 //Move Ship
 //Creates a copy of the original board, position and orientation. It then tries to move a ship randomly.

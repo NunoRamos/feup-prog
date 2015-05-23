@@ -7,7 +7,7 @@
 struct Score
 {
 	std::string name;
-	time_t score;
+	double score;
 };
 
 #endif

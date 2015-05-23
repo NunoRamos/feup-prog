@@ -63,6 +63,7 @@ void Highscore::InsertScore(const Score &score)
 
 	hasChanged = true; //remove
 
+
 	if (scores.size() == 0)
 	{
 		scores.push_back(score);

@@ -27,6 +27,8 @@ public:
 	
 	int Attack(const Bomb &b);
 	
+	unsigned int GetShipsArea() const;
+	unsigned int GetBoardArea() const;
 	unsigned int GetShipsLeft() const;
 	unsigned int GetColumns() const;
 	unsigned int GetLines() const;
