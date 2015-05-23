@@ -50,8 +50,6 @@ Board::Board(const string &filename)
 	{
 		PutShip(ships.at(i), i);
 	}
-
-	//Update();
 }
 
 //==========================================================================================//
@@ -62,8 +60,12 @@ Board::Board(const string &filename)
 
 bool Board::CanPlaceShip(const Ship &s)
 {
+
 	if (s.GetShipOrientation() == 'V')
 	{
+		if (s.GetShipPosition().lin + s.GetShipSize() > numLines - 1)
+			return false;
+
 		for (unsigned int i = 0; i < s.GetShipSize(); i++)
 		{
 			if (board.at(s.GetShipPosition().lin + i).at(s.GetShipPosition().col) != -1)
@@ -72,6 +74,9 @@ bool Board::CanPlaceShip(const Ship &s)
 	}
 	else
 	{
+		if (s.GetShipPosition().col + s.GetShipSize() > numColumns - 1)
+			return false;
+
 		for (unsigned int i = 0; i < s.GetShipSize(); i++)
 		{
 			if (board.at(s.GetShipPosition().lin).at(s.GetShipPosition().col + i) != -1)
@@ -122,6 +127,7 @@ bool Board::PutShip(const Ship &s, int shipIndex)
 			{
 				board.at(shipPosition.lin).at(shipPosition.col + i) = -1;
 			}
+			return false;
 		}
 
 		if (!CanPlaceShip(s))
@@ -166,44 +172,6 @@ void Board::RemoveShip(const Ship &s)
 //Creates a copy of the original board, position and orientation. It then tries to move a ship randomly.
 //If it cannot, the original configurations will be restored.
 //Returns true if the ship has been moved. Returns false otherwise.
-
-/*bool Board::MoveShip(unsigned int shipIndex)
-{
-	vector<vector<int>> originalBoard = board;
-	PositionInt originalPosition = ships.at(shipIndex).GetShipPosition();
-	char originalOrientation = ships.at(shipIndex).GetShipOrientation();
-	bool placeInOldPosition = false;
-
-	RemoveShip(ships.at(shipIndex));
-
-	if (ships.at(shipIndex).MoveRand(0, 0, numLines - 1, numColumns - 1))
-	{
-		if (!PutShip(ships.at(shipIndex), shipIndex))
-		{
-			placeInOldPosition = true;
-		}
-	}
-	else
-		placeInOldPosition = true;
-
-	if (placeInOldPosition)
-	{
-		ships.at(shipIndex).SetShipPosition(originalPosition);
-		ships.at(shipIndex).SetShipOrientation(originalOrientation);
-		if (CanPlaceShip(ships.at(shipIndex)))
-			board = originalBoard;
-		else
-		{
-			do
-			{
-				ships.at(shipIndex).MoveRand(0, 0, numLines - 1, numColumns - 1);
-			} while (!PutShip(ships.at(shipIndex), shipIndex));
-		}
-		return false;
-	}
-
-	return true;
-}*/
 
 bool Board::MoveShip(unsigned int shipIndex)
 {
@@ -344,21 +312,6 @@ int Board::Attack(const Bomb &b)
 	return -1;
 
 }
-
-//==========================================================================================//
-//Update
-//Recreates the "board" vector and places every ship.
-
-/*void Board::Update()
-{
-	board = vector<vector<int>>(numLines, vector<int>(numColumns, -1));
-
-	for (size_t i = 0; i < ships.size(); i++)
-	{
-		if (!ships.at(i).IsDestroyed())
-			PutShip(ships.at(i), i);
-	}
-}*/
 
 //==========================================================================================//
 //Display

@@ -113,6 +113,7 @@ bool Ship::MoveRand(unsigned int lineMin, unsigned int columnMin, unsigned int
 		{
 			if (!positionCopy.lin + size > lineMax)
 				orientationTemp = 'V';
+
 		}
 		else if (orientation == 'V')
 		{
@@ -121,9 +122,6 @@ bool Ship::MoveRand(unsigned int lineMin, unsigned int columnMin, unsigned int
 		}
 
 	}
-
-	orientation = orientationTemp;
-
 
 	switch (rand() % 5)
 	{
@@ -144,11 +142,12 @@ bool Ship::MoveRand(unsigned int lineMin, unsigned int columnMin, unsigned int
 	}
 
 
-	if (positionCopy.lin < lineMin || positionCopy.lin > lineMax || positionCopy.col < columnMin || positionCopy.col > columnMax)
+	if (positionCopy.lin < lineMin || positionCopy.lin> lineMax || positionCopy.col < columnMin || positionCopy.col > columnMax)
 		return false;
 
 	position.lin = positionCopy.lin;
 	position.col = positionCopy.col;
+	orientation = orientationTemp;
 
 	return true;
 }
