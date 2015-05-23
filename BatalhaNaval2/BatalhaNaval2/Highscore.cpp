@@ -61,6 +61,8 @@ void Highscore::InsertScore(const Score &score)
 {
 	int i = 0;
 
+	hasChanged = true;
+
 	if (scores.size() == 0)
 	{
 		scores.push_back(score);
@@ -109,9 +111,9 @@ void Highscore::ShowHighscore() const
 		cout << "| No.         Name          Score         |\n";
 		for (size_t i = 0; i < scores.size(); i++)
 		{
-			cout << "| " << setw(2) << i + 1 << ' ' << setw(10)
-				<< scores.at(i).name << setw(NAME_SIZE) << setw(10) << ' '
-				<< setw(TIME_SIZE) << scores.at(i).score << "|\n";
+			cout << "| " << setw(2) << i + 1 << ' ' << setw(13)
+				<< scores.at(i).name << setw(NAME_SIZE) << setw(5) << ' '
+				<< setw(TIME_SIZE) << scores.at(i).score << setw(11) << "|\n";
 		}
 	}
 	cout << "|=========================================|\n";

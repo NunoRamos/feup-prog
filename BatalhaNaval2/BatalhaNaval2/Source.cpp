@@ -132,7 +132,7 @@ void Play(Player &player1, Player &player2, Highscore &highscore)
 			timer = time(NULL);
 			cin >> targetString;
 			timer = time(NULL) - timer;
-			player1.AddTimeElapsed(timer);
+			player2.AddTimeElapsed(timer);
 			player1.AttackBoard(player2.GetBomb(targetString));
 			player1.ShowBoard();
 		}
@@ -143,12 +143,12 @@ void Play(Player &player1, Player &player2, Highscore &highscore)
 
 	if (player1.IsFleetDestroyed())
 	{
-		cout << "Congratulations! Player 2 has won!\n";
+		cout << "Congratulations! " << player2.GetName() << " has won!\n";
 		highscore.InsertScore(player2.GetScore());
 	}
 	else
 	{ 
-		cout << "Congratulations! Player 1 has won!\n";
+		cout << "Congratulations! " << player1.GetName() << " has won!\n";
 		highscore.InsertScore(player1.GetScore());
 	}
 
