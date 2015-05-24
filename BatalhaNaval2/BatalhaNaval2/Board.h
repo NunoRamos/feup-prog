@@ -3,6 +3,7 @@
 
 #include "Ship.h"
 #include "Bomb.h"
+#include "Position.h"
 
 #include<vector>
 #include<string>
@@ -22,10 +23,10 @@ public:
 	bool CanPlaceShip(const Ship &s);
 	
 	void Update();
-	bool PutShip(const Ship &s, int shipIndex); // adds ship to the board, if possible; Adicionei shipIndex por ser conveniente
+	bool PutShip(const Ship &s, int shipIndex); // adds ship to the board, if possible
 	void RemoveShip(const Ship &s);
 	
-	int Attack(const Bomb &b);
+	int Attack(Bomb &b);
 	
 	unsigned int GetShipsArea() const;
 	unsigned int GetBoardArea() const;
@@ -33,7 +34,7 @@ public:
 	unsigned int GetColumns() const;
 	unsigned int GetLines() const;
 
-	friend ostream& operator<<(ostream& out, const Board &board);
+	friend ostream& operator<<(ostream& out, Board &board);
 
 private:
 	int numLines, numColumns; // redundant info …

@@ -6,37 +6,33 @@
 //Bomb Constructor
 //Tries to randomly change the bomb target.
 
-Bomb::Bomb(PositionChar targetPosition, unsigned int maxLines, unsigned int maxColumns)
+Bomb::Bomb(Position<char> targetPosition, unsigned int maxLines, unsigned int maxColumns)
 {
 	
 	switch (rand() % 5)
 	{
-	case 0:
-		targetColumn = targetPosition.col;
-		targetLine = targetPosition.lin;
-		break;
 	case 1:
-		targetColumn = targetPosition.col + 1;
-		targetLine = targetPosition.lin;
+		target.SetColumn(targetPosition.GetColumn() + 1);
+		target.SetLine(targetPosition.GetLine());
 		break;
 	case 2:
-		targetColumn = targetPosition.col - 1;
-		targetLine = targetPosition.lin;
+		target.SetColumn(targetPosition.GetColumn() - 1);
+		target.SetLine(targetPosition.GetLine());
 		break;
 	case 3:
-		targetColumn = targetPosition.col;
-		targetLine = targetPosition.lin + 1;
+		target.SetColumn(targetPosition.GetColumn());
+		target.SetLine(targetPosition.GetLine() + 1);
 		break;
 	case 4:
-		targetColumn = targetPosition.col;
-		targetLine = targetPosition.lin - 1;
+		target.SetColumn(targetPosition.GetColumn());
+		target.SetLine(targetPosition.GetLine() - 1);
 		break;
 	}
 
-	targetColumn = Maximum(targetColumn, 'a');
-	targetLine = Maximum(targetLine, 'A');
-	targetColumn = Minimum(targetColumn, maxColumns + 'a' -1);
-	targetLine = Minimum(targetLine, maxLines + 'A'-1);
+	target.SetColumn(Maximum(target.GetColumn(), 'a'));
+	target.SetLine(Maximum(target.GetLine(), 'A'));
+	target.SetColumn(Minimum(target.GetColumn(), maxColumns + 'a' -1));
+	target.SetLine(Minimum(target.GetLine(), maxLines + 'A'-1));
 	
 }
 
@@ -44,10 +40,10 @@ Bomb::Bomb(PositionChar targetPosition, unsigned int maxLines, unsigned int maxC
 //Get Target Position
 //Returns the bomb target as PositionChar.
 
-PositionChar Bomb::GetTargetPosition() const
+Position<char> Bomb::GetTargetPosition()
 {
-	PositionChar Target;
-	Target.lin = targetLine;
-	Target.col = targetColumn;
-	return Target;
+	Position<char> target;
+	target.SetLine(this->target.GetLine());
+	target.SetColumn(this->target.GetColumn());
+	return target;
 }

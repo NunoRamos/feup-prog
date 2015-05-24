@@ -72,12 +72,12 @@ Score Player::GetScore() const
 
 Bomb Player::GetBomb(string targetString) const
 {
-	PositionChar target;
+	Position<char> target;
 
 	NormalizeTargetString(targetString);
 
-	target.lin = targetString.at(0);
-	target.col = targetString.at(1);
+	target.SetLine(targetString.at(0));
+	target.SetLine(targetString.at(1));
 
 	Bomb bomb(target, board.GetLines(), board.GetColumns());
 
@@ -106,9 +106,9 @@ void Player::AddTimeElapsed(time_t time)
 //Attack Board
 //Makes the ships move and then tries to attack them. 
 
-void Player::AttackBoard(const Bomb &b)
+void Player::AttackBoard(Bomb &b)
 {
-	PositionChar bombPosition = b.GetTargetPosition();
+	Position<char> bombPosition = b.GetTargetPosition();
 
 	board.MoveShips();
 	//board.Update();
@@ -123,11 +123,11 @@ void Player::AttackBoard(const Bomb &b)
 	else
 	{
 		Ship attackedShip = board.GetShip(shipAttack);
-		PositionChar position = ConvertToPositionChar(attackedShip.GetShipPosition());
+		Position<char> position = ConvertToPositionChar(attackedShip.GetShipPosition());
 		if (attackedShip.GetShipOrientation() == 'V')
-			position.lin += attackedShip.GetLastPartDestroyed();
+			position.SetLine(position.GetLine() + attackedShip.GetLastPartDestroyed());
 		else
-			position.col += attackedShip.GetLastPartDestroyed();
+			position.SetColumn(position.GetColumn() + attackedShip.GetLastPartDestroyed());
 
 		cout << "You have hit ";
 		SetColor(attackedShip.GetShipColor());
@@ -139,7 +139,7 @@ void Player::AttackBoard(const Bomb &b)
 			cout << "\nYou have sunk the ship.";
 	}
 
-	cout << "\nThe bomb fell at " << bombPosition.lin << bombPosition.col << ".\n\n";
+	cout << "\nThe bomb fell at " << bombPosition.GetLine() << bombPosition.GetColumn() << ".\n\n";
 
 	shipsLeft = board.GetShipsLeft();
 }

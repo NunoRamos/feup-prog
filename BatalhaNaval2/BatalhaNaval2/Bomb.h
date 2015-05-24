@@ -6,10 +6,10 @@
 class Bomb
 {
 public:
-	Bomb(PositionChar targetPosition, unsigned int maxLines, unsigned int maxColumns);
-	PositionChar GetTargetPosition() const;
+	Bomb(Position<char> targetPosition, unsigned int maxLines, unsigned int maxColumns);
+	Position<char> GetTargetPosition();
 
 private:
-	char targetLine, targetColumn;
+	Position<char> target;
 };
 #endif

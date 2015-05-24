@@ -4,9 +4,9 @@
 #include "Position.h"
 #include <string>
 
-PositionInt ConvertToPositionInt(PositionChar position); //Converts PositionChar to PositionInt.
+Position<unsigned int> ConvertToPositionInt(Position<char> position); //Converts PositionChar to PositionInt.
 
-PositionChar ConvertToPositionChar(PositionInt position); //Converts PositionInt to PositionChar.
+Position<char> ConvertToPositionChar(Position<unsigned int> position); //Converts PositionInt to PositionChar.
 
 void WaitForUserInput(); //Waits for a key press from the user.
 

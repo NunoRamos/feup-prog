@@ -13,12 +13,12 @@ using namespace std;
 //Gets a PositionChar as argument and converts it to PositionInt.
 //Returns a PositionInt.
 
-PositionInt ConvertToPositionInt(PositionChar position)
+Position<unsigned int> ConvertToPositionInt(Position<char> position)
 {
-	PositionInt result;
+	Position<unsigned int> result;
 
-	result.col = position.col - 97;
-	result.lin = position.lin - 65;
+	result.SetColumn(position.GetColumn() - 97);
+	result.SetLine(position.GetLine() - 65);
 
 	return result;
 }
@@ -28,12 +28,12 @@ PositionInt ConvertToPositionInt(PositionChar position)
 //Gets a PositionInt as argument and converts it to PositionChar.
 //Returns a PositionChar.
 
-PositionChar ConvertToPositionChar(PositionInt position)
+Position<char> ConvertToPositionChar(Position<unsigned int> position)
 {
-	PositionChar result;
+	Position<char> result;
 
-	result.col = position.col + 97;
-	result.lin = position.lin + 65;
+	result.SetColumn(position.GetColumn() + 97);
+	result.SetLine(position.GetLine() + 65);
 
 	return result;
 }
@@ -42,7 +42,7 @@ PositionChar ConvertToPositionChar(PositionInt position)
 //Operator << (Overloaded)
 //Prints board.
 
-ostream& operator<<(ostream& out, const Board &board)
+ostream& operator<<(ostream& out, Board &board)
 {
 	out << "  ";
 	SetColor(15);
@@ -67,9 +67,9 @@ ostream& operator<<(ostream& out, const Board &board)
 			}
 			else
 			{
-				PositionInt position;
-				position.col = j;
-				position.lin = i;
+				Position<unsigned int> position;
+				position.SetColumn(j);
+				position.SetLine(i);
 				SetColor(board.ships.at(board.board.at(i).at(j)).GetShipColor(), 4);
 				out << ' ' << board.ships.at(board.board.at(i).at(j)).GetShipStatusSymbol(position);
 			}
@@ -87,7 +87,7 @@ ostream& operator<<(ostream& out, const Board &board)
 //Operator << (Overloaded)
 //Allows to print player.board.
 
-ostream& operator<<(ostream& out, const Player &player)
+ostream& operator<<(ostream& out, Player &player)
 {
 	out << player.board;
 		return out;

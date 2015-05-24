@@ -5,7 +5,7 @@
 //Ship Constructor
 //Sets ship's attributes according to the arguments.
 
-Ship::Ship(char symbol, PositionChar position, char orientation, unsigned int size,
+Ship::Ship(char symbol, Position<char> position, char orientation, unsigned int size,
 	unsigned int color)
 {
 	this->symbol = symbol;
@@ -48,7 +48,7 @@ unsigned int Ship::GetShipSize() const
 //Get Ship Position
 //Returns the ship position as PositionInt
 
-PositionInt Ship::GetShipPosition() const
+Position<unsigned int> Ship::GetShipPosition() const
 {
 	return position;
 }
@@ -84,12 +84,12 @@ string Ship::GetShipStatus() const
 //Get Ship Status Symbol
 //Returns the ship capitalized or decapitalizeed symbol based on the ship status.
 
-char Ship::GetShipStatusSymbol(PositionInt position) const
+char Ship::GetShipStatusSymbol(Position<unsigned int> position)
 {
 	if (orientation == 'V')
-		return status.at(position.lin - this->position.lin);
+		return status.at(position.GetLine() - this->position.GetLine());
 	else
-		return status.at(position.col - this->position.col);
+		return status.at(position.GetColumn() - this->position.GetColumn());
 }
 
 //==========================================================================================//
@@ -100,24 +100,20 @@ char Ship::GetShipStatusSymbol(PositionInt position) const
 bool Ship::MoveRand(unsigned int lineMin, unsigned int columnMin, unsigned int
 	lineMax, unsigned int columnMax)
 {
-	PositionInt positionCopy;
+	Position<unsigned int> positionTemp(position.GetLine(),position.GetColumn());
 	char orientationTemp = orientation;
-	
-	positionCopy.lin = position.lin;
-	positionCopy.col = position.col;
-
 
 	if (rand() % 2 == 1)
 	{
 		if (orientation == 'H')
 		{
-			if (!positionCopy.lin + size > lineMax)
+			if (!positionTemp.GetLine() + size > lineMax)
 				orientationTemp = 'V';
 
 		}
 		else if (orientation == 'V')
 		{
-			if (!positionCopy.col + size > columnMax)
+			if (!positionTemp.GetColumn() + size > columnMax)
 				orientationTemp = 'H';
 		}
 
@@ -128,25 +124,25 @@ bool Ship::MoveRand(unsigned int lineMin, unsigned int columnMin, unsigned int
 	case 0:
 		break;
 	case 1:
-		positionCopy.col = position.col + 1;
+		positionTemp.SetColumn(position.GetColumn() + 1);
 		break;
 	case 2:
-		positionCopy.col = position.col - 1;
+		positionTemp.SetColumn(position.GetColumn() - 1);
 		break;
 	case 3:
-		positionCopy.lin = position.lin + 1;
+		positionTemp.SetLine(position.GetLine() + 1);
 		break;
 	case 4:
-		positionCopy.lin = position.lin - 1;
+		positionTemp.SetLine(position.GetLine() - 1);
 		break;
 	}
 
 
-	if (positionCopy.lin < lineMin || positionCopy.lin> lineMax || positionCopy.col < columnMin || positionCopy.col > columnMax)
+	if (positionTemp.GetLine() < lineMin || positionTemp.GetLine() > lineMax || positionTemp.GetColumn() < columnMin || positionTemp.GetColumn() > columnMax)
 		return false;
 
-	position.lin = positionCopy.lin;
-	position.col = positionCopy.col;
+	position.SetLine(positionTemp.GetLine());
+	position.SetColumn(positionTemp.GetColumn());
 	orientation = orientationTemp;
 
 	return true;
@@ -199,7 +195,7 @@ bool Ship::IsDestroyed() const
 //Set Ship Position
 //Sets the ship position according to its argument.
 
-void Ship::SetShipPosition(PositionInt position)
+void Ship::SetShipPosition(Position<unsigned int> position)
 {
 	this->position = position;
 }

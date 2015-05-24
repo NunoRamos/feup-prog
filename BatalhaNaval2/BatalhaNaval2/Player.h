@@ -20,9 +20,9 @@ public:
 	Score GetScore() const;
 	time_t GetTimeElapsed() const;
 	Board GetBoard() const;
-	friend ostream& operator<<(ostream& out, const Player&);
+	friend ostream& operator<<(ostream& out, Player&);
 	void AddTimeElapsed(time_t time);
-	void AttackBoard(const Bomb &b); // "receives" a bomb from the opponent;
+	void AttackBoard(Bomb &b); // "receives" a bomb from the opponent;
 	// updates own board taking into account the damages
 	// caused by the bomb; BEFORE THAT… moves the ships
 private:
