@@ -101,7 +101,7 @@ ostream& operator<<(ostream& out, Player &player)
 void WaitForUserInput()
 {
 	string dummy;
-	std::cout << "Press any key to continue . . .\n";
+	std::cout << "Press enter to continue . . .\n";
 	cin.ignore(1000, '\n');
 	getline(cin, dummy);
 }
