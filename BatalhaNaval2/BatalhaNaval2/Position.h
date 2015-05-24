@@ -18,13 +18,57 @@ private:
 	T column;
 };
 
-struct PositionChar // to store a board position in char format
-{ // example: 'B','d'
-	char lin, col; // ranges: lin - ['A'..'Z']; col - ['a'..'z']
-};
-//-----------------------------------------------------------------------------
-struct PositionInt // to store a board position in unsig. integer format
-{ // example: 7,0
-	unsigned int lin, col; // ranges: lin - [0..26]; col - [0..26]
-};
+template<class T>
+Position<T>::Position()
+{
+		line = 0;
+		column = 0;
+}
+
+template<class T>
+Position<T>::Position(T line, T column)
+{
+	this->line = line;
+	this->column = column;
+}
+
+template<class T>
+T Position<T>::GetLine() const
+{
+	return line;
+}
+
+template<class T>
+T Position<T>::GetColumn() const
+{
+	return column;
+}
+
+template<class T>
+void Position<T>::SetLine(T line)
+{
+	this->line = line;
+}
+
+template<class T>
+void Position<T>::SetColumn(T column)
+{
+	this->column = column;
+}
+
+template<class T>
+void Position<T>::SetPosition(T line, T column)
+{
+	this->line = line;
+	this->column = column;
+}
+
+template<class T>
+Position<T>& Position<T>::operator=(const Position<T>& right)
+{
+	this->line = right.GetLine();
+	this->column = right.GetColumn();
+	return *this;
+}
+
 #endif

@@ -77,7 +77,7 @@ Bomb Player::GetBomb(string targetString) const
 	NormalizeTargetString(targetString);
 
 	target.SetLine(targetString.at(0));
-	target.SetLine(targetString.at(1));
+	target.SetColumn(targetString.at(1));
 
 	Bomb bomb(target, board.GetLines(), board.GetColumns());
 
@@ -111,7 +111,7 @@ void Player::AttackBoard(Bomb &b)
 	Position<char> bombPosition = b.GetTargetPosition();
 
 	board.MoveShips();
-	//board.Update();
+
 	int shipAttack = board.Attack(b);
 	if (shipAttack == -1)
 		cout << "You have missed the ship.";
