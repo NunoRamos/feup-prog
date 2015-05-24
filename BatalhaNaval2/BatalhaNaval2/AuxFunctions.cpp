@@ -4,6 +4,7 @@
 
 #include "AuxFunctions.h"
 #include "Position.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -38,6 +39,61 @@ PositionChar ConvertToPositionChar(PositionInt position)
 }
 
 //==========================================================================================//
+//Operator << (Overloaded)
+//Prints board.
+
+ostream& operator<<(ostream& out, const Board &board)
+{
+	out << "  ";
+	SetColor(15);
+	for (unsigned int i = 0; i < board.board.at(0).size(); i++)	//	Creates the decapitalized letter row on the top of the board.
+	{
+		out << ' ' << (char)(97 + i);
+	}
+	out << endl;
+
+
+	for (unsigned int i = 0; i < board.numLines; i++)
+	{
+		SetColor(15);
+		out << ' ' << (char)(65 + i);		//Adds the capitalized letter column to the left of the board.
+
+		for (unsigned int j = 0; j < board.numColumns; j++)
+		{
+			if (board.board.at(i).at(j) == -1 || board.ships.at(board.board.at(i).at(j)).IsDestroyed())
+			{
+				SetColor(15, 4);
+				out << ' ' << '.';
+			}
+			else
+			{
+				PositionInt position;
+				position.col = j;
+				position.lin = i;
+				SetColor(board.ships.at(board.board.at(i).at(j)).GetShipColor(), 4);
+				out << ' ' << board.ships.at(board.board.at(i).at(j)).GetShipStatusSymbol(position);
+			}
+
+		}
+		out << endl;
+	}
+	SetColor(15);
+	out << endl;
+
+	return out;
+}
+
+//==========================================================================================//
+//Operator << (Overloaded)
+//Allows to print player.board.
+
+ostream& operator<<(ostream& out, const Player &player)
+{
+	out << player.board;
+		return out;
+}
+
+//==========================================================================================//
 //Wait For User Input
 //Waits for the user to press a key.
 //Returns nothing.
@@ -45,7 +101,7 @@ PositionChar ConvertToPositionChar(PositionInt position)
 void WaitForUserInput()
 {
 	string dummy;
-	cout << "Press any key to continue . . .\n";
+	std::cout << "Press any key to continue . . .\n";
 	cin.ignore(1000, '\n');
 	getline(cin, dummy);
 }

@@ -167,6 +167,11 @@ void Board::RemoveShip(const Ship &s)
 	}
 }
 
+//==========================================================================================//
+//Get Ships Area
+//Calculates the area of the board occupied by all the ships.
+//Returns the sum of all ships sizes.
+
 unsigned int Board::GetShipsArea() const
 {
 	unsigned int sum = 0;
@@ -178,6 +183,10 @@ unsigned int Board::GetShipsArea() const
 
 	return sum;
 }
+
+//==========================================================================================//
+//Get Board Area
+//Returns number of columns times number of lines.
 
 unsigned int Board::GetBoardArea() const
 {
@@ -327,50 +336,5 @@ int Board::Attack(const Bomb &b)
 	}
 
 	return -1;
-
-}
-
-//==========================================================================================//
-//Display
-//Prints the board to the screen.
-
-void Board::Display() const
-{
-
-	cout << "  ";
-	SetColor(15);
-	for (unsigned int i = 0; i < board.at(0).size(); i++)	//	Creates the decapitalized letter row on the top of the board.
-	{														
-		cout << ' ' << (char)(97 + i);						
-	}														
-	cout << endl;
-
-
-	for (unsigned int i = 0; i < numLines; i++)
-	{
-		SetColor(15);
-		cout << ' ' << (char)(65 + i);		//Adds the capitalized letter column to the left of the board.
-
-		for (unsigned int j = 0; j < numColumns; j++)
-		{
-			if (board.at(i).at(j) == -1 || ships.at(board.at(i).at(j)).IsDestroyed())
-			{
-				SetColor(15, 4);
-				cout << ' ' << '.';
-			}
-			else
-			{
-				PositionInt position;
-				position.col = j;
-				position.lin = i;
-				SetColor(ships.at(board.at(i).at(j)).GetShipColor(), 4);
-				cout << ' ' << ships.at(board.at(i).at(j)).GetShipStatusSymbol(position);
-			}
-
-		}
-		cout << endl;
-	}
-	SetColor(15);
-	cout << endl;
 
 }

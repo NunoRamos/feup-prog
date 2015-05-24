@@ -74,7 +74,7 @@ void BoardSetup(Player &player1, Player &player2)
 	player1 = Player(playerName, boardFileName);
 
 	cout << endl;
-	player1.ShowBoard();
+	cout << player1;
 	WaitForUserInput();
 	ClearScreen();
 
@@ -92,7 +92,7 @@ void BoardSetup(Player &player1, Player &player2)
 	player2 = Player(playerName, boardFileName);
 
 	cout << endl;
-	player2.ShowBoard();
+	cout << player2;
 	WaitForUserInput();
 	ClearScreen();
 
@@ -115,26 +115,26 @@ void Play(Player &player1, Player &player2, Highscore &highscore)
 		if (turn % 2 == 0) // JOGADOR 1
 		{
 			cout << "PLAYER 1 - " << player1.GetName() << " - TURN " << turn / 2 << "\n\n";
-			player2.ShowBoard();
+			cout << player2;
 			cout << player1.GetName() << ", where do you want to send the bomb?\n";
 			timer = time(NULL);
 			cin >> targetString;
 			timer = time(NULL) - timer;
 			player1.AddTimeElapsed(timer);
 			player2.AttackBoard(player1.GetBomb(targetString));
-			player2.ShowBoard();
+			cout << player2;
 		}
 		else  //JOGADOR 2
 		{
 			cout << "PLAYER 2 - " << player2.GetName() << " - TURN " << turn / 2 << "\n\n";
-			player1.ShowBoard();
+			cout << player1;
 			cout << player2.GetName() << ", where do you want to send the bomb?\n";
 			timer = time(NULL);
 			cin >> targetString;
 			timer = time(NULL) - timer;
 			player2.AddTimeElapsed(timer);
 			player1.AttackBoard(player2.GetBomb(targetString));
-			player1.ShowBoard();
+			cout << player1;
 		}
 		turn++;
 		WaitForUserInput();

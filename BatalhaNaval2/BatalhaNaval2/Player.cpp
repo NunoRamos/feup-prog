@@ -28,14 +28,6 @@ Player::Player(string playerName, string boardFileName)
 	timeElapsed = 0;
 }
 
-//==========================================================================================//
-//Show Board
-//Displays board.
-
-void Player::ShowBoard() const
-{
-	board.Display();
-}
 
 //==========================================================================================//
 //Is Fleet Destroyed

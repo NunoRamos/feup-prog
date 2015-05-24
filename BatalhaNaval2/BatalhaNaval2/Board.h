@@ -32,8 +32,8 @@ public:
 	unsigned int GetShipsLeft() const;
 	unsigned int GetColumns() const;
 	unsigned int GetLines() const;
-	
-	void Display() const; // displays the colored board during the game
+
+	friend ostream& operator<<(ostream& out, const Board &board);
 
 private:
 	int numLines, numColumns; // redundant info …
