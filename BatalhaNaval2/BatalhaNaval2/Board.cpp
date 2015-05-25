@@ -39,7 +39,8 @@ Board::Board(const string &filename)
 	while (!boardFile.eof())
 	{
 		boardFile >> symbol >> size >> line >> column >> orientation >> color;
-		position = Position<char>(line, column);
+		position.line = line;
+		position.column = column;
 		ships.push_back(Ship(symbol, position, orientation, size, color));
 	}
 
@@ -64,23 +65,23 @@ bool Board::CanPlaceShip(const Ship &s)
 
 	if (s.GetShipOrientation() == 'V')
 	{
-		if (s.GetShipPosition().GetLine() + s.GetShipSize() > numLines - 1)
+		if (s.GetShipPosition().line + s.GetShipSize() > numLines - 1)
 			return false;
 
 		for (unsigned int i = 0; i < s.GetShipSize(); i++)
 		{
-			if (board.at(s.GetShipPosition().GetLine() + i).at(s.GetShipPosition().GetColumn()) != -1)
+			if (board.at(s.GetShipPosition().line + i).at(s.GetShipPosition().column) != -1)
 				return false;
 		}
 	}
 	else
 	{
-		if (s.GetShipPosition().GetColumn() + s.GetShipSize() > numColumns - 1)
+		if (s.GetShipPosition().column + s.GetShipSize() > numColumns - 1)
 			return false;
 
 		for (unsigned int i = 0; i < s.GetShipSize(); i++)
 		{
-			if (board.at(s.GetShipPosition().GetLine()).at(s.GetShipPosition().GetColumn() + i) != -1)
+			if (board.at(s.GetShipPosition().line).at(s.GetShipPosition().column + i) != -1)
 				return false;
 		}
 	}
@@ -105,7 +106,7 @@ bool Board::PutShip(const Ship &s, int shipIndex)
 		{
 			for (unsigned int i = 0; i < s.GetShipSize(); i++)
 			{
-				board.at(shipPosition.GetLine() + i).at(shipPosition.GetColumn()) = -1;
+				board.at(shipPosition.line + i).at(shipPosition.column) = -1;
 			}
 			return false;
 		}
@@ -116,7 +117,7 @@ bool Board::PutShip(const Ship &s, int shipIndex)
 		//Adds the ship.
 		for (unsigned int i = 0; i < s.GetShipSize(); i++)
 		{
-			board.at(shipPosition.GetLine() + i).at(shipPosition.GetColumn()) = shipIndex;
+			board.at(shipPosition.line + i).at(shipPosition.column) = shipIndex;
 		}
 	}
 	else
@@ -126,7 +127,7 @@ bool Board::PutShip(const Ship &s, int shipIndex)
 		{
 			for (unsigned int i = 0; i < s.GetShipSize(); i++)
 			{
-				board.at(shipPosition.GetLine()).at(shipPosition.GetColumn() + i) = -1;
+				board.at(shipPosition.line).at(shipPosition.column + i) = -1;
 			}
 			return false;
 		}
@@ -137,7 +138,7 @@ bool Board::PutShip(const Ship &s, int shipIndex)
 		//Adds the ship.
 		for (unsigned int i = 0; i < s.GetShipSize(); i++)
 		{
-			board.at(shipPosition.GetLine()).at(shipPosition.GetColumn() + i) = shipIndex;
+			board.at(shipPosition.line).at(shipPosition.column + i) = shipIndex;
 		}
 	}
 
@@ -156,14 +157,14 @@ void Board::RemoveShip(const Ship &s)
 	{
 		for (unsigned int i = 0; i < s.GetShipSize(); i++)
 		{
-			board.at(shipPosition.GetLine() + i).at(shipPosition.GetColumn()) = -1;
+			board.at(shipPosition.line + i).at(shipPosition.column) = -1;
 		}
 	}
 	else
 	{
 		for (unsigned int i = 0; i < s.GetShipSize(); i++)
 		{
-			board.at(shipPosition.GetLine()).at(shipPosition.GetColumn() + i) = -1;
+			board.at(shipPosition.line).at(shipPosition.column + i) = -1;
 		}
 	}
 }
@@ -296,9 +297,9 @@ int Board::Attack(Bomb &b)
 {
 	Position<unsigned int> bombPosition = ConvertToPositionUInt(b.GetTargetPosition());
 
-	if (board.at(bombPosition.GetLine()).at(bombPosition.GetColumn()) != -1)
+	if (board.at(bombPosition.line).at(bombPosition.line) != -1)
 	{
-		int shipIndex = board.at(bombPosition.GetLine()).at(bombPosition.GetColumn());
+		int shipIndex = board.at(bombPosition.line).at(bombPosition.column);
 		size_t i = 0;
 		char orientation = ships.at(shipIndex).GetShipOrientation();
 
@@ -308,7 +309,7 @@ int Board::Attack(Bomb &b)
 		{
 			while (i < ships.at(shipIndex).GetShipSize())
 			{
-				if (shipPosition.GetColumn() + i == bombPosition.GetColumn())
+				if (shipPosition.column + i == bombPosition.column)
 				{
 					break;
 				}
@@ -319,7 +320,7 @@ int Board::Attack(Bomb &b)
 		{
 			while (i < ships.at(shipIndex).GetShipSize())
 			{
-				if (shipPosition.GetLine() + i == bombPosition.GetLine())
+				if (shipPosition.line + i == bombPosition.line)
 				{
 					break;
 				}
@@ -327,10 +328,10 @@ int Board::Attack(Bomb &b)
 			}
 		}
 
-		if (ships.at(board.at(bombPosition.GetLine()).at(bombPosition.GetColumn())).IsDestroyed())
+		if (ships.at(board.at(bombPosition.line).at(bombPosition.column)).IsDestroyed())
 			return -1;
 
-		if (!ships.at(board.at(bombPosition.GetLine()).at(bombPosition.GetColumn())).Attack(i))
+		if (!ships.at(board.at(bombPosition.line).at(bombPosition.column)).Attack(i))
 			return -2;
 		else
 			return shipIndex;

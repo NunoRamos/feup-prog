@@ -76,8 +76,8 @@ Bomb Player::GetBomb(string targetString) const
 
 	NormalizeTargetString(targetString);
 
-	target.SetLine(targetString.at(0));
-	target.SetColumn(targetString.at(1));
+	target.line = targetString.at(0);
+	target.column = targetString.at(1);
 
 	Bomb bomb(target, board.GetLines(), board.GetColumns());
 
@@ -125,9 +125,9 @@ void Player::AttackBoard(Bomb &b)
 			Ship attackedShip = board.GetShip(shipAttack);
 			Position<char> position = ConvertToPositionChar(attackedShip.GetShipPosition());
 			if (attackedShip.GetShipOrientation() == 'V')
-				position.SetLine(position.GetLine() + attackedShip.GetLastPartDestroyed());
+				position.line = position.line + attackedShip.GetLastPartDestroyed();
 			else
-				position.SetColumn(position.GetColumn() + attackedShip.GetLastPartDestroyed());
+				position.column = position.column + attackedShip.GetLastPartDestroyed();
 
 			cout << "You have hit ";
 			SetColor(attackedShip.GetShipColor());
@@ -139,7 +139,7 @@ void Player::AttackBoard(Bomb &b)
 				cout << "\nYou have sunk the ship.";
 		}
 
-	cout << "\nThe bomb fell at " << bombPosition.GetLine() << bombPosition.GetColumn() << ".\n\n";
+	cout << "\nThe bomb fell at " << bombPosition.line << bombPosition.column << ".\n\n";
 
 	shipsLeft = board.GetShipsLeft();
 }

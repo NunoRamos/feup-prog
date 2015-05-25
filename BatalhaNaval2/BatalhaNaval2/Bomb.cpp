@@ -12,27 +12,27 @@ Bomb::Bomb(Position<char> targetPosition, unsigned int maxLines, unsigned int ma
 	switch (rand() % 5)
 	{
 	case 1:
-		targetPosition.SetColumn(targetPosition.GetColumn() + 1);
-		targetPosition.SetLine(targetPosition.GetLine());
+		targetPosition.column = targetPosition.column + 1;
+		targetPosition.line = targetPosition.line;
 		break;
 	case 2:
-		targetPosition.SetColumn(targetPosition.GetColumn() - 1);
-		targetPosition.SetLine(targetPosition.GetLine());
+		targetPosition.column = targetPosition.column - 1;
+		targetPosition.line = targetPosition.line;
 		break;
 	case 3:
-		targetPosition.SetColumn(targetPosition.GetColumn());
-		targetPosition.SetLine(targetPosition.GetLine() + 1);
+		targetPosition.column = targetPosition.column;
+		targetPosition.line = targetPosition.line + 1;
 		break;
 	case 4:
-		targetPosition.SetColumn(targetPosition.GetColumn());
-		targetPosition.SetLine(targetPosition.GetLine() - 1);
+		targetPosition.column = targetPosition.column;
+		targetPosition.line = targetPosition.line - 1;
 		break;
 	}
 
-	targetPosition.SetColumn(Maximum(targetPosition.GetColumn(), 'a'));
-	targetPosition.SetLine(Maximum(targetPosition.GetLine(), 'A'));
-	targetPosition.SetColumn(Minimum(targetPosition.GetColumn(), maxColumns + 'a' - 1));
-	targetPosition.SetLine(Minimum(targetPosition.GetLine(), maxLines + 'A' - 1));
+	targetPosition.column = Maximum(targetPosition.column, 'a');
+	targetPosition.line = Maximum(targetPosition.line, 'A');
+	targetPosition.column = Minimum(targetPosition.column, maxColumns + 'a' - 1);
+	targetPosition.line = Minimum(targetPosition.line, maxLines + 'A' - 1);
 	
 	target = targetPosition;
 }
@@ -44,7 +44,7 @@ Bomb::Bomb(Position<char> targetPosition, unsigned int maxLines, unsigned int ma
 Position<char> Bomb::GetTargetPosition()
 {
 	Position<char> target;
-	target.SetLine(this->target.GetLine());
-	target.SetColumn(this->target.GetColumn());
+	target.line = this->target.line;
+	target.column = this->target.column;
 	return target;
 }
