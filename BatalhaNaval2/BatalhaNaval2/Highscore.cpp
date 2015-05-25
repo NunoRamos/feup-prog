@@ -6,7 +6,7 @@
 
 using namespace std;
 
-const string HIGHSCORE_FILENAME = "highscore.dat";
+const string HIGHSCORE_FILENAME = "highscore.txt";
 const unsigned int NAME_SIZE = 10;
 const unsigned int TIME_SIZE = 10;
 const unsigned int HIGHSCORE_SIZE = 10;
@@ -17,13 +17,14 @@ const unsigned int HIGHSCORE_SIZE = 10;
 
 Highscore::Highscore()
 {
+	scores.clear();
 	ifstream file;
 	char name[NAME_SIZE], score[HIGHSCORE_SIZE];
 	Score temp;
 	string score_s;
 	int i = 0;
 
-	file.open(HIGHSCORE_FILENAME, ios::binary);
+	file.open(HIGHSCORE_FILENAME);
 
 	if (file.is_open())
 	{
@@ -34,7 +35,7 @@ Highscore::Highscore()
 			file.read(score, TIME_SIZE);
 			score_s = score;
 			temp.name = name;
-			temp.score = stoi(score_s);
+			temp.score = stod(score_s);
 			scores.push_back(temp);
 			i++;
 			file.peek();
@@ -43,7 +44,7 @@ Highscore::Highscore()
 	else
 	{
 		ofstream createFile;
-		createFile.open(HIGHSCORE_FILENAME, ios::binary);
+		createFile.open(HIGHSCORE_FILENAME);
 		createFile.close();
 	}
 
@@ -63,7 +64,6 @@ void Highscore::InsertScore(const Score &score)
 
 	hasChanged = true; //remove
 
-
 	if (scores.size() == 0)
 	{
 		scores.push_back(score);
@@ -76,16 +76,22 @@ void Highscore::InsertScore(const Score &score)
 			if (score.score < scores.at(i).score)
 			{
 				scores.insert(scores.begin() + i, score);
-				if (scores.size() > 10)
-					scores.pop_back();
-				if (i != 9)
-					hasChanged = true;
+				hasChanged = true;
+				break;
 			}
 		}
+		
+		if (i == scores.size())
+			scores.push_back(score);
+		if (scores.size() > 10)
+			scores.pop_back();
+		if (i != 9)
+			hasChanged = true;
 	}
+
 }
 
-void Highscore::InsertScore(string name, time_t score)
+void Highscore::InsertScore(string name, double score)
 {
 	Score temp;
 	temp.name = name;
@@ -133,7 +139,7 @@ Highscore::~Highscore()
 		ofstream file;
 		char buffer[TIME_SIZE];
 
-		file.open(HIGHSCORE_FILENAME, ios::binary);
+		file.open(HIGHSCORE_FILENAME);
 
 		for (size_t i = 0; i < scores.size(); i++)
 		{

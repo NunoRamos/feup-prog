@@ -13,9 +13,8 @@ class Highscore
 public:
 	Highscore();
 	void InsertScore(const Score &score);
-	void InsertScore(string name, time_t score);
+	void InsertScore(string name, double score);
 	void ShowHighscore() const;
-	void AddScore(string name, time_t score);
 	~Highscore();
 private:
 	bool hasChanged;

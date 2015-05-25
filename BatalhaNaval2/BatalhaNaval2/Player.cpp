@@ -88,7 +88,7 @@ Bomb Player::GetBomb(string targetString) const
 //Get Time Elapsed
 //Returns the sum of time elapsed during all the player's turn
 
-time_t Player::GetTimeElapsed() const
+double Player::GetTimeElapsed() const
 {
 	return timeElapsed;
 }
@@ -97,7 +97,7 @@ time_t Player::GetTimeElapsed() const
 //Add Time Elapsed
 //Adds time elapsed.
 
-void Player::AddTimeElapsed(time_t time)
+void Player::AddTimeElapsed(double time)
 {
 	timeElapsed += time;
 }

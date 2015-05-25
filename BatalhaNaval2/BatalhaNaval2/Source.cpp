@@ -162,11 +162,11 @@ void Play(Player &player1, Player &player2, Highscore &highscore)
 
 int main()
 {
-	Highscore highscore;
 	Player player1, player2;
 
 	while (true)
 	{
+		Highscore highscore;
 		switch (Menu())
 		{
 		case 1:
@@ -182,6 +182,7 @@ int main()
 		default:
 			return 1;
 		}
+
 	}
 
 	return 0;
