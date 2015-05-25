@@ -26,7 +26,8 @@ int Menu()
 		<< "|                                         |\n"
 		<< "|            1. Play                      |\n"
 		<< "|            2. Highscores                |\n"
-		<< "|            3. Exit                      |\n"
+		<< "|            3. Instructions              |\n"
+		<< "|            4. Exit                      |\n"
 		<< "|=========================================|\n"
 		<< " Select an option:  ";
 	cin >> option;
@@ -34,6 +35,10 @@ int Menu()
 
 	return option;
 }
+
+//==========================================================================================//
+//Does File Exist
+//Returns true if a file exists, returning false otherwise.
 
 bool DoesFileExist(string filename)
 {
@@ -48,6 +53,32 @@ bool DoesFileExist(string filename)
 	return true;
 }
 
+//==========================================================================================//
+//Show Instructions
+//Shows the instructions page.
+
+void ShowInstructions()
+{
+	cout << "A new version of the battleship game is proposed." << endl
+		<< "As in the original game, each player has a rectangular board where he/she" << endl
+		<< "positions his/her ships and the objective of the game is to destroy the" << endl
+		<< "opponent's ships." << endl << endl
+		<< "The differences from the original battleship game are the following:" << endl
+		<< "- In each turn, the player can see the opponent's board;" << endl
+		<< "- An attack to the opponent is made by sending a bomb, aiming at a" << endl
+		<< "specified position of the opponent's board; however, due to manufacturing" << endl
+		<< "problems the bomb may not fall exactly at the specified position;" << endl
+		<< "- During the trajectory of the bomb the opponent's ships may move;" << endl
+		<< "- Each player plays just once, before passing the turn to the opponent;" << endl
+		<< "- A ship is considered to be destroyed when at least half of the ship is" << endl
+		<< "destroyed." << endl << endl
+		<< "Both players have the same number and type of ships." << endl
+		<< "Before the game begins, each player chooses the name of the file that contains" << endl
+		<< "his/her board." << endl
+		<< "The game ends whenever one of the fleets is destroyed." << endl;
+
+	WaitForUserInput();
+}
 
 //==========================================================================================//
 //Board Setup
@@ -187,6 +218,9 @@ int main()
 			WaitForUserInput();
 			break;
 		case 3:
+			ShowInstructions();
+			break;
+		case 4:
 			return 0;
 		default:
 			return 1;
