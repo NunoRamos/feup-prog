@@ -24,7 +24,7 @@ public:
 	void AddTimeElapsed(time_t time);
 	void AttackBoard(Bomb &b); // "receives" a bomb from the opponent;
 	// updates own board taking into account the damages
-	// caused by the bomb; BEFORE THAT	moves the ships
+	// caused by the bomb; BEFORE THAT moves the ships
 private:
 	string name; // name of the player
 	Board board; // boaard of the player

@@ -4,7 +4,7 @@
 #include "Position.h"
 #include <string>
 
-Position<unsigned int> ConvertToPositionInt(Position<char> position); //Converts PositionChar to PositionInt.
+Position<unsigned int> ConvertToPositionUInt(Position<char> position); //Converts PositionChar to PositionInt.
 
 Position<char> ConvertToPositionChar(Position<unsigned int> position); //Converts PositionInt to PositionChar.
 

@@ -9,11 +9,11 @@
 using namespace std;
 
 //==========================================================================================//
-//Convert To PositionInt
-//Gets a PositionChar as argument and converts it to PositionInt.
+//Convert To Position<unsigned tnt>
+//Gets a Position<char> as argument and converts it to Position<unsigned int>.
 //Returns a PositionInt.
 
-Position<unsigned int> ConvertToPositionInt(Position<char> position)
+Position<unsigned int> ConvertToPositionUInt(Position<char> position)
 {
 	Position<unsigned int> result;
 

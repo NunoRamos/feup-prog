@@ -37,7 +37,7 @@ public:
 	friend ostream& operator<<(ostream& out, Board &board);
 
 private:
-	int numLines, numColumns; // redundant info …
+	unsigned int numLines, numColumns; // redundant info …
 	vector<Ship> ships; // ships that are placed on the board
 	vector<vector<int>> board; // each element indicates
 	// the index of a ship in the 'ships' vector

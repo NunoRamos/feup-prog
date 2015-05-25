@@ -294,7 +294,7 @@ unsigned int Board::GetLines() const
 
 int Board::Attack(Bomb &b)
 {
-	Position<unsigned int> bombPosition = ConvertToPositionInt(b.GetTargetPosition());
+	Position<unsigned int> bombPosition = ConvertToPositionUInt(b.GetTargetPosition());
 
 	if (board.at(bombPosition.GetLine()).at(bombPosition.GetColumn()) != -1)
 	{

@@ -9,7 +9,7 @@ Ship::Ship(char symbol, Position<char> position, char orientation, unsigned int 
 	unsigned int color)
 {
 	this->symbol = symbol;
-	this->position = ConvertToPositionInt(position);
+	this->position = ConvertToPositionUInt(position);
 	this->orientation = orientation;
 	this->size = size;
 	this->color = color;

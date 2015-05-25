@@ -52,7 +52,6 @@ bool DoesFileExist(string filename)
 //==========================================================================================//
 //Board Setup
 //Ask the user(s) the players' name and the board files name.
-//Returns nothing.
 
 void BoardSetup(Player &player1, Player &player2)
 {
@@ -101,7 +100,6 @@ void BoardSetup(Player &player1, Player &player2)
 //==========================================================================================//
 //Play
 //Takes care of the general aspect of the game: whose turn it is, if a player has won, etc.
-//Returns nothing.
 
 void Play(Player &player1, Player &player2, Highscore &highscore)
 {
@@ -119,6 +117,11 @@ void Play(Player &player1, Player &player2, Highscore &highscore)
 			cout << player1.GetName() << ", where do you want to send the bomb?\n";
 			timer = time(NULL);
 			cin >> targetString;
+			while (targetString.size() < 2)
+			{
+				cout << "\nYou need 2 characters to define the coordinates.\nTry again.";
+				cin >> targetString;
+			}
 			timer = time(NULL) - timer;
 			player1.AddTimeElapsed(timer);
 			player2.AttackBoard(player1.GetBomb(targetString));
@@ -131,6 +134,11 @@ void Play(Player &player1, Player &player2, Highscore &highscore)
 			cout << player2.GetName() << ", where do you want to send the bomb?\n";
 			timer = time(NULL);
 			cin >> targetString;
+			while (targetString.size() < 2)
+			{
+				cout << "\nYou need 2 characters to define the coordinates.\nTry again.\n";
+				cin >> targetString;
+			}
 			timer = time(NULL) - timer;
 			player2.AddTimeElapsed(timer);
 			player1.AttackBoard(player2.GetBomb(targetString));
