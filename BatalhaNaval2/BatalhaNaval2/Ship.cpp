@@ -87,9 +87,9 @@ string Ship::GetShipStatus() const
 char Ship::GetShipStatusSymbol(Position<unsigned int> position)
 {
 	if (orientation == 'V')
-		return status.at(position.GetLine() - this->position.GetLine());
+		return status.at(position.line - this->position.line);
 	else
-		return status.at(position.GetColumn() - this->position.GetColumn());
+		return status.at(position.column - this->position.column);
 }
 
 //==========================================================================================//
@@ -100,20 +100,22 @@ char Ship::GetShipStatusSymbol(Position<unsigned int> position)
 bool Ship::MoveRand(unsigned int lineMin, unsigned int columnMin, unsigned int
 	lineMax, unsigned int columnMax)
 {
-	Position<unsigned int> positionTemp(position.GetLine(),position.GetColumn());
+	Position<unsigned int> positionTemp;
+	positionTemp.line = position.line;
+	positionTemp.column = position.column;
 	char orientationTemp = orientation;
 
 	if (rand() % 2 == 1)
 	{
 		if (orientation == 'H')
 		{
-			if (!positionTemp.GetLine() + size > lineMax)
+			if (!positionTemp.line + size > lineMax)
 				orientationTemp = 'V';
 
 		}
 		else if (orientation == 'V')
 		{
-			if (!positionTemp.GetColumn() + size > columnMax)
+			if (!positionTemp.column + size > columnMax)
 				orientationTemp = 'H';
 		}
 
@@ -124,25 +126,25 @@ bool Ship::MoveRand(unsigned int lineMin, unsigned int columnMin, unsigned int
 	case 0:
 		break;
 	case 1:
-		positionTemp.SetColumn(position.GetColumn() + 1);
+		positionTemp.column = position.column + 1;
 		break;
 	case 2:
-		positionTemp.SetColumn(position.GetColumn() - 1);
+		positionTemp.column = position.column - 1;
 		break;
 	case 3:
-		positionTemp.SetLine(position.GetLine() + 1);
+		positionTemp.line = position.line + 1;
 		break;
 	case 4:
-		positionTemp.SetLine(position.GetLine() - 1);
+		positionTemp.line = position.line - 1;
 		break;
 	}
 
 
-	if (positionTemp.GetLine() < lineMin || positionTemp.GetLine() > lineMax || positionTemp.GetColumn() < columnMin || positionTemp.GetColumn() > columnMax)
+	if (positionTemp.line < lineMin || positionTemp.line > lineMax || positionTemp.column < columnMin || positionTemp.column > columnMax)
 		return false;
 
-	position.SetLine(positionTemp.GetLine());
-	position.SetColumn(positionTemp.GetColumn());
+	position.line = positionTemp.line;
+	position.column = positionTemp.column;
 	orientation = orientationTemp;
 
 	return true;

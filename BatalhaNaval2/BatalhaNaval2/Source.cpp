@@ -10,6 +10,7 @@
 
 using namespace std;
 
+
 //==========================================================================================//
 //Menu
 //Shows the menu and lets the user select an option.
@@ -59,7 +60,7 @@ bool DoesFileExist(string filename)
 
 void ShowInstructions()
 {
-	cout << "A new version of the battleship game is proposed." << endl
+	cout << "This is a new version of the battleship game." << endl
 		<< "As in the original game, each player has a rectangular board where he/she" << endl
 		<< "positions his/her ships and the objective of the game is to destroy the" << endl
 		<< "opponent's ships." << endl << endl
@@ -74,8 +75,11 @@ void ShowInstructions()
 		<< "destroyed." << endl << endl
 		<< "Both players have the same number and type of ships." << endl
 		<< "Before the game begins, each player chooses the name of the file that contains" << endl
-		<< "his/her board." << endl
-		<< "The game ends whenever one of the fleets is destroyed." << endl;
+		<< "his/her board. The game ends whenever one of the fleets is destroyed." << endl << endl
+		<< "Currently, there are 3 game modes. Fast, Medium and Marathon that relate" << endl
+		<< "to the time needed to complete the game. Type its name when asked for" << endl
+		<< "the board file name. It is possible to add board configurations " << endl
+		<< "provided that they use the same model as the originals." << endl;
 
 	WaitForUserInput();
 }

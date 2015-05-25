@@ -17,8 +17,8 @@ Position<unsigned int> ConvertToPositionUInt(Position<char> position)
 {
 	Position<unsigned int> result;
 
-	result.SetColumn(position.GetColumn() - 97);
-	result.SetLine(position.GetLine() - 65);
+	result.column = position.column - 97;
+	result.line = position.line - 65;
 
 	return result;
 }
@@ -32,8 +32,8 @@ Position<char> ConvertToPositionChar(Position<unsigned int> position)
 {
 	Position<char> result;
 
-	result.SetColumn(position.GetColumn() + 97);
-	result.SetLine(position.GetLine() + 65);
+	result.column = position.column + 97;
+	result.line = position.line + 65;
 
 	return result;
 }
@@ -68,8 +68,8 @@ ostream& operator<<(ostream& out, Board &board)
 			else
 			{
 				Position<unsigned int> position;
-				position.SetColumn(j);
-				position.SetLine(i);
+				position.column = j;
+				position.line = i;
 				SetColor(board.ships.at(board.board.at(i).at(j)).GetShipColor(), 4);
 				out << ' ' << board.ships.at(board.board.at(i).at(j)).GetShipStatusSymbol(position);
 			}
