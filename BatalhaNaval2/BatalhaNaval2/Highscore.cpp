@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <iomanip>
+#include <sstream>
 
 using namespace std;
 
@@ -17,25 +18,22 @@ const unsigned int HIGHSCORE_SIZE = 10;
 
 Highscore::Highscore()
 {
-	scores.clear();
 	ifstream file;
-	char name[NAME_SIZE], score[HIGHSCORE_SIZE];
 	Score temp;
-	string score_s;
 	int i = 0;
 
 	file.open(HIGHSCORE_FILENAME);
 
 	if (file.is_open())
 	{
+		string buffer;
 		file.peek();
 		while (!file.eof() && i < 10)
 		{
-			file.read(name, NAME_SIZE);
-			file.read(score, TIME_SIZE);
-			score_s = score;
-			temp.name = name;
-			temp.score = stod(score_s);
+			getline(file, temp.name, '-');
+			getline(file, buffer, ';');
+			temp.score = stod(buffer);
+			file.ignore(1000, '\n');
 			scores.push_back(temp);
 			i++;
 			file.peek();
@@ -44,7 +42,7 @@ Highscore::Highscore()
 	else
 	{
 		ofstream createFile;
-		createFile.open(HIGHSCORE_FILENAME);
+		createFile.open(HIGHSCORE_FILENAME, ios::binary);
 		createFile.close();
 	}
 
@@ -64,6 +62,7 @@ void Highscore::InsertScore(const Score &score)
 
 	hasChanged = true; //remove
 
+
 	if (scores.size() == 0)
 	{
 		scores.push_back(score);
@@ -76,11 +75,9 @@ void Highscore::InsertScore(const Score &score)
 			if (score.score < scores.at(i).score)
 			{
 				scores.insert(scores.begin() + i, score);
-				hasChanged = true;
 				break;
 			}
 		}
-		
 		if (i == scores.size())
 			scores.push_back(score);
 		if (scores.size() > 10)
@@ -88,7 +85,6 @@ void Highscore::InsertScore(const Score &score)
 		if (i != 9)
 			hasChanged = true;
 	}
-
 }
 
 void Highscore::InsertScore(string name, double score)
@@ -136,18 +132,16 @@ Highscore::~Highscore()
 {
 	if (hasChanged)
 	{
+		ostringstream ss;
 		ofstream file;
-		char buffer[TIME_SIZE];
-
 		file.open(HIGHSCORE_FILENAME);
 
 		for (size_t i = 0; i < scores.size(); i++)
 		{
-			file.write(scores.at(i).name.c_str(), NAME_SIZE);
-			itoa(scores.at(i).score, buffer, 10);
-			file.write(buffer, TIME_SIZE);
+			ss << scores.at(i).name << '-' << scores.at(i).score << ';' << endl;
 		}
 
+		file << ss.str();
 		file.close();
 	}
 }

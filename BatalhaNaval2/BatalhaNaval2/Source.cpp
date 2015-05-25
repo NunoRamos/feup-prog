@@ -147,7 +147,7 @@ void Play(Player &player1, Player &player2, Highscore &highscore)
 		highscore.InsertScore(player2.GetScore());
 	}
 	else
-	{ 
+	{
 		cout << "Congratulations! " << player1.GetName() << " has won!\n";
 		highscore.InsertScore(player1.GetScore());
 	}
@@ -162,11 +162,12 @@ void Play(Player &player1, Player &player2, Highscore &highscore)
 
 int main()
 {
-	Player player1, player2;
+	Highscore highscore;
 
 	while (true)
 	{
-		Highscore highscore;
+		Player player1, player2;
+
 		switch (Menu())
 		{
 		case 1:
@@ -182,7 +183,6 @@ int main()
 		default:
 			return 1;
 		}
-
 	}
 
 	return 0;
