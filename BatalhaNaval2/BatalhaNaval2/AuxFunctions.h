@@ -12,7 +12,6 @@ void WaitForUserInput(); //Waits for a key press from the user.
 
 void ClearScreen(); //Clears the console screen.
 
-
 void SetColor(unsigned int color); //Sets text color.
 
 void SetColor(unsigned int color, unsigned int background_color); //Sets text and background color.

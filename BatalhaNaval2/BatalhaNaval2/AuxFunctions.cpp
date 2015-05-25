@@ -9,9 +9,9 @@
 using namespace std;
 
 //==========================================================================================//
-//Convert To Position<unsigned tnt>
+//Convert To Position<unsigned int>
 //Gets a Position<char> as argument and converts it to Position<unsigned int>.
-//Returns a PositionInt.
+//Returns a Position<unsigned int>.
 
 Position<unsigned int> ConvertToPositionUInt(Position<char> position)
 {
@@ -24,9 +24,9 @@ Position<unsigned int> ConvertToPositionUInt(Position<char> position)
 }
 
 //==========================================================================================//
-//Convert To PositionChar
-//Gets a PositionInt as argument and converts it to PositionChar.
-//Returns a PositionChar.
+//Convert To Position<char>
+//Gets a Position<unsigned int> as argument and converts it to Position<char>.
+//Returns a Position<char>.
 
 Position<char> ConvertToPositionChar(Position<unsigned int> position)
 {
@@ -179,6 +179,11 @@ int Minimum(int n1, int n2)
 	else
 		return n2;
 }
+
+//==========================================================================================//
+//Normalize Target String
+//Alters the string according to the norms. This way, the user can write the coordinates in upper or lower case.
+//Returns the normalized string.
 
 void NormalizeTargetString(std::string &targetString)
 {

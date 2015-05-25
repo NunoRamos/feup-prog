@@ -8,13 +8,10 @@
 using namespace std;
 
 const string HIGHSCORE_FILENAME = "highscore.txt";
-const unsigned int NAME_SIZE = 10;
-const unsigned int TIME_SIZE = 10;
-const unsigned int HIGHSCORE_SIZE = 10;
 
 //========================================================================================= //
 //Highscore Default Constructor
-//Reads the highscore binary file and fills the "scores" vector.
+//Reads the highscore text file and fills the "scores" vector.
 
 Highscore::Highscore()
 {
@@ -42,7 +39,7 @@ Highscore::Highscore()
 	else
 	{
 		ofstream createFile;
-		createFile.open(HIGHSCORE_FILENAME, ios::binary);
+		createFile.open(HIGHSCORE_FILENAME);
 		createFile.close();
 	}
 
@@ -60,9 +57,6 @@ void Highscore::InsertScore(const Score &score)
 {
 	int i = 0;
 
-	hasChanged = true; //remove
-
-
 	if (scores.size() == 0)
 	{
 		scores.push_back(score);
@@ -78,7 +72,7 @@ void Highscore::InsertScore(const Score &score)
 				break;
 			}
 		}
-		if (i == scores.size())
+		if (i == scores.size() && i != 10)
 			scores.push_back(score);
 		if (scores.size() > 10)
 			scores.pop_back();
@@ -115,8 +109,8 @@ void Highscore::ShowHighscore() const
 		for (size_t i = 0; i < scores.size(); i++)
 		{
 			cout << "| " << setw(2) << i + 1 << ' ' << setw(13)
-				<< scores.at(i).name << setw(NAME_SIZE) << setw(5) << ' '
-				<< setw(TIME_SIZE) << scores.at(i).score << setw(11) << "|\n";
+				<< scores.at(i).name << setw(15) << setw(5) << ' '
+				<< setw(10) << scores.at(i).score << setw(11) << "|\n";
 		}
 	}
 	cout << "|=========================================|\n";
