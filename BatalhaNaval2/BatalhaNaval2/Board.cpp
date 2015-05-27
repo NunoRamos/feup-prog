@@ -297,7 +297,7 @@ int Board::Attack(Bomb &b)
 {
 	Position<unsigned int> bombPosition = ConvertToPositionUInt(b.GetTargetPosition());
 
-	if (board.at(bombPosition.line).at(bombPosition.line) != -1)
+	if (board.at(bombPosition.line).at(bombPosition.column) != -1)
 	{
 		int shipIndex = board.at(bombPosition.line).at(bombPosition.column);
 		size_t i = 0;
