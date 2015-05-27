@@ -60,7 +60,7 @@ Score Player::GetScore() const
 	Score temp;
 
 	temp.name = name;
-	temp.score = timeElapsed*board.GetShipsArea() / board.GetBoardArea();
+	temp.score = (double) timeElapsed*board.GetShipsArea() / board.GetBoardArea();
 
 	return temp;
 }
